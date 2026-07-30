@@ -4,3 +4,4 @@ agent/__pycache__/
 agent/**/__pycache__/
 .DS_Store
 docs/.DS_Store
+/Sibbu Agent starten.app
