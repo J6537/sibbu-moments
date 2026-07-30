@@ -1,0 +1,28 @@
+{
+  "id": "reisen-island-gletscher",
+  "section": "reisen",
+  "title": "Eisblaues Land",
+  "subtitle": null,
+  "excerpt": "Gletscherzungen, schwarzer Sand und Wasserfälle in beinahe surrealem Blau.",
+  "body": null,
+  "location": "Island · Gletscher",
+  "date": null,
+  "category": "reiseziel",
+  "tags": [
+    "island",
+    "gletscher"
+  ],
+  "image": null,
+  "image_mobile": null,
+  "image_alt": null,
+  "image_caption": null,
+  "link": null,
+  "featured": false,
+  "source_project": null,
+  "source_file": null,
+  "created_at": "2026-07-30T00:00:00Z",
+  "updated_at": "2026-07-30T00:00:00Z",
+  "published_at": null,
+  "content_status": "planned",
+  "fallback_art": "ice"
+}

@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
   "description": "Agenten-Gedächtnis für Sibbu Moments. Wird NICHT auf der Website ausgegeben. Wird vom späteren lokalen Website-Pflege-Agenten gelesen und nach jedem Lauf aktualisiert. Diese Erstversion beschreibt den Zustand direkt nach der technischen Umstellung auf die datenbasierte Architektur — vor dem ersten Agentenlauf.",
-  "last_updated": "2026-07-30T20:09:13Z",
-  "last_checked": "2026-07-30T20:09:13Z",
+  "last_updated": "2026-07-30T20:42:23Z",
+  "last_checked": "2026-07-30T20:42:23Z",
   "last_successful_test": null,
   "last_git_commit": "",
   "publish_status": "ready_for_review",
@@ -13,21 +13,27 @@
     "fotografie-unterwegs",
     "hero-main",
     "journal-ein-stiller-vormittag-im-doost-bei-theisenzell",
-    "journal-ustupu-in-rot-ein-leiser-tag-der-erinnerung",
-    "journal-zwischen-regenwald-und-wasserstra-e-gamboa",
+    "journal-palmen-riff-und-eine-ruhige-minute-in-kuna-yala",
+    "journal-ustupu-leise-wege-durchs-gr-n-2",
     "kontakt-main",
-    "reisen-island-gletscher",
-    "reisen-marokko-sahara",
-    "reisen-norwegen-fjorde",
+    "reisen-achensee-baerenkopf-wanderung-tirol",
+    "reisen-gamboa-panama-kanal-nasenbaer-containerschiff",
+    "reisen-kuna-yala-san-blas-palmenstrand",
     "reisen-panama-kuna-yala-ustupu",
     "seo-main",
     "ueber-uns-main",
     "zitat-main"
   ],
   "active_image_files": [
+    "assets/images/mobile/achensee-vom-baerenkopf.webp",
+    "assets/images/mobile/balancieren-auf-palmenstamm-san-blas.webp",
+    "assets/images/mobile/containerschiff-bei-gamboa-panama-kanal.webp",
     "assets/images/mobile/kanu-auf-ustupu-kuna-yala.webp",
     "assets/images/mobile/palmeninseln-kuna-yala-ustupu.webp",
+    "assets/images/web/achensee-vom-baerenkopf.webp",
+    "assets/images/web/balancieren-auf-palmenstamm-san-blas.webp",
     "assets/images/web/blick-vom-baerenkopf-tirol.webp",
+    "assets/images/web/containerschiff-bei-gamboa-panama-kanal.webp",
     "assets/images/web/kanu-auf-ustupu-kuna-yala.webp",
     "assets/images/web/kanu-mit-hund-ustupu.webp",
     "assets/images/web/kuna-revolution-ustupu-100-jahre-2.webp",
@@ -38,15 +44,15 @@
   "section_last_changed": {
     "hero": "2026-07-30T20:06:50Z",
     "zitat": "2026-07-30T00:00:00Z",
-    "reisen": "2026-07-30T20:06:50Z",
+    "reisen": "2026-07-30T20:42:23Z",
     "fotografie": "2026-07-30T20:09:13Z",
-    "journal": "2026-07-30T20:06:50Z",
+    "journal": "2026-07-30T20:42:23Z",
     "ueber-uns": "2026-07-30T00:00:00Z",
     "kontakt": "2026-07-30T00:00:00Z",
     "seo": "2026-07-30T00:00:00Z"
   },
   "content_source": "sibbu_content_agent_ai",
-  "used_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+  "used_project": "Kultur/ustupu-kuna-yala-indigene-kultur, Reise/gamboa-panama-kanal-nasenbaer-containerschiff, Reise/kuna-yala-san-blas-palmenstrand, Wandern/achensee-baerenkopf-wanderung-tirol",
   "known_content_gaps": [],
   "notes_for_next_agent_run": "Dies ist der Ausgangszustand nach der technischen Migration. Es hat noch kein automatisierter Pflege-Lauf stattgefunden. Vor dem ersten produktiven Lauf: tools/validate_site.py ausführen und last_successful_test erst nach grünem Ergebnis setzen.",
   "used_ids": [
@@ -58,12 +64,17 @@
     "journal-ein-stiller-vormittag-im-doost-bei-theisenzell",
     "journal-leicht-packen-weit-kommen",
     "journal-licht-das-man-nicht-planen-kann",
+    "journal-palmen-riff-und-eine-ruhige-minute-in-kuna-yala",
     "journal-ustupu-in-rot-ein-leiser-tag-der-erinnerung",
     "journal-ustupu-leise-wege-durchs-gr-n",
+    "journal-ustupu-leise-wege-durchs-gr-n-2",
     "journal-wie-eine-reise-zur-geschichte-wird",
     "journal-zwischen-regenwald-und-wasserstra-e-gamboa",
     "kontakt-main",
+    "reisen-achensee-baerenkopf-wanderung-tirol",
+    "reisen-gamboa-panama-kanal-nasenbaer-containerschiff",
     "reisen-island-gletscher",
+    "reisen-kuna-yala-san-blas-palmenstrand",
     "reisen-marokko-sahara",
     "reisen-norwegen-fjorde",
     "reisen-panama-kuna-yala",
@@ -96,28 +107,67 @@
     "assets/images/web/ustupu-kuna-hut-rotes-hemd.webp": {
       "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
       "source_file": "ustupu-kuna-hut-rotes-hemd.jpg"
+    },
+    "assets/images/web/achensee-vom-baerenkopf.webp": {
+      "source_project": "Wandern/achensee-baerenkopf-wanderung-tirol",
+      "source_file": "achensee-vom-baerenkopf.jpg"
+    },
+    "assets/images/web/containerschiff-bei-gamboa-panama-kanal.webp": {
+      "source_project": "Reise/gamboa-panama-kanal-nasenbaer-containerschiff",
+      "source_file": "containerschiff-bei-gamboa-panama-kanal.jpg"
+    },
+    "assets/images/web/balancieren-auf-palmenstamm-san-blas.webp": {
+      "source_project": "Reise/kuna-yala-san-blas-palmenstrand",
+      "source_file": "balancieren-auf-palmenstamm-san-blas.jpg"
     }
   },
   "last_ai_decisions": {
-    "run_at": "2026-07-30T20:09:13Z",
+    "run_at": "2026-07-30T20:42:23Z",
     "applied": [
       {
-        "area": "fotografie",
-        "slot_key": "Menschen",
+        "area": "reisen",
+        "slot_key": 2,
         "action": "replace",
-        "item_id": "fotografie-menschen",
-        "decision_basis": "Reparatur: EXIF-Rotationsfehler der bisherigen Verarbeitung behoben (dasselbe Quellbild, korrekt zugeschnitten).",
-        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
-        "source_file": "kuna-revolution-ustupu-100-jahre.jpg"
+        "item_id": "reisen-achensee-baerenkopf-wanderung-tirol",
+        "decision_basis": "Bild passt ins 4:3-Kartenformat und Text ist durch Bärenkopf_blog.txt belegt.",
+        "source_project": "Wandern/achensee-baerenkopf-wanderung-tirol",
+        "source_file": "achensee-vom-baerenkopf.jpg"
       },
       {
-        "area": "fotografie",
-        "slot_key": "Details",
+        "area": "reisen",
+        "slot_key": 3,
         "action": "replace",
-        "item_id": "fotografie-details",
-        "decision_basis": "Reparatur: EXIF-Rotationsfehler der bisherigen Verarbeitung behoben (dasselbe Quellbild, korrekt zugeschnitten).",
-        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
-        "source_file": "ustupu-kuna-hut-rotes-hemd.jpg"
+        "item_id": "reisen-gamboa-panama-kanal-nasenbaer-containerschiff",
+        "decision_basis": "Klares Reiseziel-Motiv; Textbezug aus Panama Canal_blog.txt, Bild zeigt die Kanal‑Szene.",
+        "source_project": "Reise/gamboa-panama-kanal-nasenbaer-containerschiff",
+        "source_file": "containerschiff-bei-gamboa-panama-kanal.jpg"
+      },
+      {
+        "area": "reisen",
+        "slot_key": 4,
+        "action": "replace",
+        "item_id": "reisen-kuna-yala-san-blas-palmenstrand",
+        "decision_basis": "Szenisch starke 4:3‑Aufnahme; Textbasis durch Neues_Projekt265_blog.txt belegt.",
+        "source_project": "Reise/kuna-yala-san-blas-palmenstrand",
+        "source_file": "balancieren-auf-palmenstamm-san-blas.jpg"
+      },
+      {
+        "area": "journal",
+        "slot_key": 1,
+        "action": "replace",
+        "item_id": "journal-ustupu-leise-wege-durchs-gr-n-2",
+        "decision_basis": "Vorschlag aus Schritt 1; Text belegt durch Neues_Projekt_blog.txt und ergänzt das bestehende Ustupu‑Thema sinnvoll.",
+        "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
+        "source_file": "Neues_Projekt_blog.txt"
+      },
+      {
+        "area": "journal",
+        "slot_key": 3,
+        "action": "replace",
+        "item_id": "journal-palmen-riff-und-eine-ruhige-minute-in-kuna-yala",
+        "decision_basis": "Vorschlag aus Schritt 1 mit eindeutig belegter Quelle; füllt den noch unveröffentlichten Slot.",
+        "source_project": "Reise/kuna-yala-san-blas-palmenstrand",
+        "source_file": "Neues_Projekt265_blog.txt"
       }
     ],
     "rejected": []
