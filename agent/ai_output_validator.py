@@ -15,7 +15,15 @@ und content_writer.py erst danach.
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Union
 
-from . import discover
+from . import discover, images
+
+# content-schema.json definiert fuer reisen/journal keine body_max_len (dort
+# bislang nicht vorgesehenes Feld) -- eigene, grosszuegige Obergrenze fuer
+# den laengeren Beitragsseiten-Text, rein als Sicherheitsnetz gegen
+# ausufernden Text. Ein zu kurzer/fehlender body blockiert die Entscheidung
+# NICHT (die Karte wird trotzdem aktualisiert) -- er fuehrt nur dazu, dass
+# pages.py fuer diesen Slot keine Beitragsseite erzeugt.
+ARTICLE_BODY_MAX_LEN = 2200
 
 
 @dataclass
@@ -29,6 +37,7 @@ class Decision:
     subtitle: Optional[str] = None
     location: Optional[str] = None
     excerpt: Optional[str] = None
+    body: Optional[str] = None
     image_alt: Optional[str] = None
     source_file_text: Optional[str] = None
     decision_basis: str = ""
@@ -73,6 +82,35 @@ def _resolve_image(projects, source_project, image_filename):
     if image is None:
         return None, None
     return project, image
+
+
+def _geometry_reason(image, target_ratio: Optional[float]) -> Optional[str]:
+    """Prueft, ob das Bild (nach EXIF-Korrektur) fuer das Ziel-Seitenverhaeltnis
+    geeignet ist -- OHNE das Bild tatsaechlich zu verarbeiten. Gibt eine
+    Ablehnungsbegruendung zurueck, oder None wenn geeignet. Verhindert, dass
+    ein geometrisch unpassendes Bild (z.B. Hochformat-Portraet fuer einen
+    breiten Slot) ueberhaupt als Entscheidung akzeptiert wird."""
+    if target_ratio is None:
+        return None
+    if not image.width or not image.height:
+        return "Bildmasse konnten nicht gelesen werden (Datei evtl. beschaedigt)"
+    if not images.is_suitable_for_ratio((image.width, image.height), target_ratio):
+        retain = images.crop_retain_fraction((image.width, image.height), target_ratio)
+        return (
+            f"Bildausrichtung ({image.width}x{image.height}) passt nicht zum Slot-Seitenverhaeltnis "
+            f"{target_ratio:.2f} (nur {retain:.0%} der Kante bliebe erhalten, Minimum {images.MIN_RETAIN_FRACTION:.0%})"
+        )
+    return None
+
+
+def _fotografie_category_positions(site_content: dict) -> Dict[str, int]:
+    positions = {}
+    items = (site_content.get("fotografie") or {}).get("items", [])
+    for idx, item in enumerate(items, start=1):
+        category = item.get("category")
+        if category:
+            positions[category] = idx
+    return positions
 
 
 def _combined_provenance(site_content: dict, site_state: dict) -> Dict[tuple, tuple]:
@@ -140,6 +178,14 @@ def _validate_hero(entry: dict, projects, content_schema, provenance, claimed, r
         return
 
     rules = _section_rules(content_schema, "hero")
+
+    image_rules = images.get_section_image_rules(content_schema, "hero")
+    geometry_reason = _geometry_reason(image, images.target_ratio_for_rules(image_rules) if image_rules else None)
+    if geometry_reason:
+        result.rejected.append(Rejection("hero", None, geometry_reason, entry))
+        result.content_gaps.append(f"hero: KI-Vorschlag verworfen ({geometry_reason}) -- bestehender Inhalt bleibt aktiv")
+        return
+
     if not _len_ok(entry.get("subtitle"), rules.get("subtitle_max_len")):
         result.rejected.append(Rejection("hero", None, "subtitle ueberschreitet subtitle_max_len", entry))
         result.content_gaps.append("hero: KI-Vorschlag verworfen (subtitle zu lang)")
@@ -172,6 +218,8 @@ def _validate_hero(entry: dict, projects, content_schema, provenance, claimed, r
 
 def _validate_reisen(entries: List[dict], projects, content_schema, provenance, claimed, result: ValidationResult):
     rules = _section_rules(content_schema, "reisen")
+    reisen_image_rules = images.get_section_image_rules(content_schema, "reisen")
+    reisen_ratio = images.target_ratio_for_rules(reisen_image_rules) if reisen_image_rules else None
     seen_positions = set()
 
     for entry in entries:
@@ -195,6 +243,12 @@ def _validate_reisen(entries: List[dict], projects, content_schema, provenance, 
             result.content_gaps.append(f"reisen Position {position}: KI-Vorschlag verworfen (Bildreferenz nicht auffindbar)")
             continue
 
+        geometry_reason = _geometry_reason(image, reisen_ratio)
+        if geometry_reason:
+            result.rejected.append(Rejection("reisen", position, geometry_reason, entry))
+            result.content_gaps.append(f"reisen Position {position}: KI-Vorschlag verworfen ({geometry_reason}) -- bestehender Inhalt bleibt aktiv")
+            continue
+
         if not _nonempty(entry.get("title")) or not _len_ok(entry.get("title"), rules.get("title_max_len")):
             result.rejected.append(Rejection("reisen", position, "title fehlt oder zu lang", entry))
             result.content_gaps.append(f"reisen Position {position}: KI-Vorschlag verworfen (title ungueltig)")
@@ -211,6 +265,10 @@ def _validate_reisen(entries: List[dict], projects, content_schema, provenance, 
             result.rejected.append(Rejection("reisen", position, "image_alt fehlt", entry))
             result.content_gaps.append(f"reisen Position {position}: KI-Vorschlag verworfen (image_alt fehlt)")
             continue
+        if not _len_ok(entry.get("body"), ARTICLE_BODY_MAX_LEN):
+            result.rejected.append(Rejection("reisen", position, "body ueberschreitet ARTICLE_BODY_MAX_LEN", entry))
+            result.content_gaps.append(f"reisen Position {position}: KI-Vorschlag verworfen (body zu lang)")
+            continue
 
         key = (entry.get("source_project"), entry.get("image_filename"))
         own_slot = ("reisen", position)
@@ -221,15 +279,16 @@ def _validate_reisen(entries: List[dict], projects, content_schema, provenance, 
             continue
 
         claimed[key] = own_slot
+        body = entry.get("body") if _nonempty(entry.get("body")) else None
         result.decisions.append(Decision(
             area="reisen", slot_key=position, action="replace",
             source_project=entry.get("source_project"), image_filename=entry.get("image_filename"),
             title=entry.get("title"), location=entry.get("location"), excerpt=entry.get("excerpt"),
-            image_alt=entry.get("image_alt"), decision_basis=entry.get("decision_basis", ""),
+            body=body, image_alt=entry.get("image_alt"), decision_basis=entry.get("decision_basis", ""),
         ))
 
 
-def _validate_fotografie(entries: List[dict], projects, content_schema, provenance, claimed, result: ValidationResult, allowed_categories):
+def _validate_fotografie(entries: List[dict], projects, content_schema, provenance, claimed, result: ValidationResult, allowed_categories, category_positions):
     seen_categories = set()
 
     for entry in entries:
@@ -251,6 +310,14 @@ def _validate_fotografie(entries: List[dict], projects, content_schema, provenan
         if project is None or image is None:
             result.rejected.append(Rejection("fotografie", category, "source_project/image_filename nicht im Archiv auffindbar", entry))
             result.content_gaps.append(f"fotografie {category}: KI-Vorschlag verworfen (Bildreferenz nicht auffindbar)")
+            continue
+
+        slot_position = category_positions.get(category)
+        image_rules = images.get_section_image_rules(content_schema, "fotografie", slot_position=slot_position) if slot_position else None
+        geometry_reason = _geometry_reason(image, images.target_ratio_for_rules(image_rules) if image_rules else None)
+        if geometry_reason:
+            result.rejected.append(Rejection("fotografie", category, geometry_reason, entry))
+            result.content_gaps.append(f"fotografie {category}: KI-Vorschlag verworfen ({geometry_reason}) -- bestehender Inhalt bleibt aktiv")
             continue
 
         if not _nonempty(entry.get("image_alt")):
@@ -304,6 +371,10 @@ def _validate_journal(entries: List[dict], projects, content_schema, result: Val
             result.rejected.append(Rejection("journal", entry.get("slot_hint"), "source_file fehlt oder ist kein echter Dateiname im Projekt (Beleg-Pflicht)", entry))
             result.content_gaps.append("journal: KI-Vorschlag verworfen (source_file nicht belegt)")
             continue
+        if not _len_ok(entry.get("body"), ARTICLE_BODY_MAX_LEN):
+            result.rejected.append(Rejection("journal", entry.get("slot_hint"), "body ueberschreitet ARTICLE_BODY_MAX_LEN", entry))
+            result.content_gaps.append("journal: KI-Vorschlag verworfen (body zu lang)")
+            continue
 
         slot_hint = entry.get("slot_hint")
         if isinstance(slot_hint, int) and 1 <= slot_hint <= 3 and slot_hint not in used_positions:
@@ -318,9 +389,10 @@ def _validate_journal(entries: List[dict], projects, content_schema, result: Val
             position = auto_position
 
         used_positions.add(position)
+        body = entry.get("body") if _nonempty(entry.get("body")) else None
         result.decisions.append(Decision(
             area="journal", slot_key=position, action="replace",
-            title=entry.get("title"), excerpt=entry.get("excerpt"),
+            title=entry.get("title"), excerpt=entry.get("excerpt"), body=body,
             source_project=source_project, source_file_text=source_file,
             decision_basis=entry.get("decision_basis", ""),
         ))
@@ -340,7 +412,8 @@ def validate(editorial: dict, projects, site_content: dict, site_state: dict, co
     _validate_reisen(editorial.get("reisen", []) or [], projects, content_schema, provenance, claimed, result)
 
     fotografie_categories = content_schema.get("sections", {}).get("fotografie", {}).get("allowed_categories", [])
-    _validate_fotografie(editorial.get("fotografie", []) or [], projects, content_schema, provenance, claimed, result, fotografie_categories)
+    category_positions = _fotografie_category_positions(site_content)
+    _validate_fotografie(editorial.get("fotografie", []) or [], projects, content_schema, provenance, claimed, result, fotografie_categories, category_positions)
 
     _validate_journal(editorial.get("journal", []) or [], projects, content_schema, result)
 

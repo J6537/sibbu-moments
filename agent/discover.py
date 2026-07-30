@@ -9,7 +9,15 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from . import config
+from . import config, images
+
+
+def _orientation_label(width: int, height: int) -> str:
+    if width > height:
+        return "querformat"
+    if height > width:
+        return "hochformat"
+    return "quadratisch"
 
 
 @dataclass
@@ -20,6 +28,8 @@ class ImageInfo:
     tiere_natur: str = ""
     kreativ: str = ""
     stichwoerter: List[str] = field(default_factory=list)
+    width: int = 0
+    height: int = 0
 
     def to_prompt_dict(self):
         return {
@@ -28,6 +38,12 @@ class ImageInfo:
             "tiere_natur": self.tiere_natur,
             "kreativ": self.kreativ,
             "stichwoerter": self.stichwoerter,
+            # Bereits EXIF-korrigierte, tatsaechliche Anzeige-Ausrichtung --
+            # damit die KI Bilder nicht fuer geometrisch ungeeignete Slots
+            # vorschlaegt (z.B. Hochformat-Portraet fuer den breiten Hero).
+            "breite": self.width,
+            "hoehe": self.height,
+            "ausrichtung": _orientation_label(self.width, self.height) if self.width and self.height else "unbekannt",
         }
 
 
@@ -226,6 +242,10 @@ def _load_project(hauptkategorie_dir: Path, project_dir: Path) -> Optional[Proje
 
     for image_path in image_paths:
         desc = image_descriptions.get(image_path.name, {})
+        try:
+            width, height = images.oriented_dimensions(image_path)
+        except Exception:
+            width, height = 0, 0
         data.images.append(ImageInfo(
             filename=image_path.name,
             path=image_path,
@@ -233,6 +253,8 @@ def _load_project(hauptkategorie_dir: Path, project_dir: Path) -> Optional[Proje
             tiere_natur=desc.get("tiere_natur", ""),
             kreativ=desc.get("kreativ", ""),
             stichwoerter=desc.get("stichwoerter", []),
+            width=width,
+            height=height,
         ))
 
     return data

@@ -79,12 +79,12 @@ def _apply_hero(decision: Decision, projects, site_content, content_schema, time
     project = discover.find_project_by_id(projects, decision.source_project)
     image = discover.find_image(project, decision.image_filename)
 
-    _archive_content_item(existing, "hero", timestamp)
-    archived_image = images.archive_existing_image(existing.get("image"), timestamp)
-
     content_schema_rules = images.get_section_image_rules(content_schema, "hero")
     basename = slugify(Path(decision.image_filename).stem)
-    processed = images.process_image(image.path, content_schema_rules, basename)
+    processed = images.process_image(image.path, content_schema_rules, basename)  # kann ImageUnsuitableError werfen -- Aufrufer faengt das ab
+
+    _archive_content_item(existing, "hero", timestamp)
+    archived_image = images.archive_existing_image(existing.get("image"), timestamp)
 
     new_item = dict(existing)
     new_item.update({
@@ -113,12 +113,12 @@ def _apply_reisen(decision: Decision, projects, site_content, content_schema, ti
     project = discover.find_project_by_id(projects, decision.source_project)
     image = discover.find_image(project, decision.image_filename)
 
-    _archive_content_item(existing, "reisen", timestamp)
-    archived_image = images.archive_existing_image(existing.get("image"), timestamp)
-
     rules = images.get_section_image_rules(content_schema, "reisen")
     basename = slugify(Path(decision.image_filename).stem)
-    processed = images.process_image(image.path, rules, basename)
+    processed = images.process_image(image.path, rules, basename)  # kann ImageUnsuitableError werfen -- Aufrufer faengt das ab
+
+    _archive_content_item(existing, "reisen", timestamp)
+    archived_image = images.archive_existing_image(existing.get("image"), timestamp)
 
     new_id = _mint_unique_id("reisen", project.projektordner, used_ids)
     used_ids.add(new_id)
@@ -129,7 +129,7 @@ def _apply_reisen(decision: Decision, projects, site_content, content_schema, ti
         "title": decision.title,
         "subtitle": None,
         "excerpt": decision.excerpt,
-        "body": None,
+        "body": decision.body,
         "location": decision.location,
         "date": None,
         "category": "reiseziel",
@@ -162,12 +162,12 @@ def _apply_fotografie(decision: Decision, projects, site_content, content_schema
     project = discover.find_project_by_id(projects, decision.source_project)
     image = discover.find_image(project, decision.image_filename)
 
-    _archive_content_item(existing, "fotografie", timestamp)
-    archived_image = images.archive_existing_image(existing.get("image"), timestamp)
-
     rules = images.get_section_image_rules(content_schema, "fotografie", slot_position=idx + 1)
     basename = slugify(Path(decision.image_filename).stem)
-    processed = images.process_image(image.path, rules, basename)
+    processed = images.process_image(image.path, rules, basename)  # kann ImageUnsuitableError werfen -- Aufrufer faengt das ab
+
+    _archive_content_item(existing, "fotografie", timestamp)
+    archived_image = images.archive_existing_image(existing.get("image"), timestamp)
 
     new_item = dict(existing)
     new_item.update({
@@ -203,7 +203,7 @@ def _apply_journal(decision: Decision, site_content, timestamp, used_ids, write_
         "title": decision.title,
         "subtitle": None,
         "excerpt": decision.excerpt,
-        "body": None,
+        "body": decision.body,
         "location": None,
         "date": None,
         "category": None,
@@ -219,6 +219,9 @@ def _apply_journal(decision: Decision, site_content, timestamp, used_ids, write_
         "created_at": _now_iso(),
         "updated_at": _now_iso(),
         "published_at": None,
+        # Bleibt 'draft' bis pages.py (siehe run.py) erfolgreich eine echte
+        # Beitragsseite erzeugt hat -- erst dann sinnvoll 'published' mit
+        # echtem Link, sonst waere "Weiterlesen" irrefuehrend.
         "content_status": "draft",
         "fallback_art": None,
     }
@@ -277,18 +280,26 @@ def apply_decisions(
     touched_sections = set()
 
     for decision in validation_result.decisions:
-        if decision.area == "hero":
-            _apply_hero(decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log)
-            touched_sections.add("hero")
-        elif decision.area == "reisen":
-            _apply_reisen(decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log)
-            touched_sections.add("reisen")
-        elif decision.area == "fotografie":
-            _apply_fotografie(decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log)
-            touched_sections.add("fotografie")
-        elif decision.area == "journal":
-            _apply_journal(decision, site_content, timestamp, used_ids, write_log)
-            touched_sections.add("journal")
+        try:
+            if decision.area == "hero":
+                _apply_hero(decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log)
+                touched_sections.add("hero")
+            elif decision.area == "reisen":
+                _apply_reisen(decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log)
+                touched_sections.add("reisen")
+            elif decision.area == "fotografie":
+                _apply_fotografie(decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log)
+                touched_sections.add("fotografie")
+            elif decision.area == "journal":
+                _apply_journal(decision, site_content, timestamp, used_ids, write_log)
+                touched_sections.add("journal")
+        except images.ImageUnsuitableError as exc:
+            # Letztes Sicherheitsnetz (der Validator sollte das bereits
+            # abgefangen haben) -- bestehender Inhalt bleibt unangetastet,
+            # der Lauf wird nicht abgebrochen.
+            validation_result.content_gaps.append(
+                f"{decision.area} {decision.slot_key}: Bildverarbeitung abgelehnt ({exc}) -- bestehender Inhalt bleibt aktiv"
+            )
 
     now = _now_iso()
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")

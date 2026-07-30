@@ -53,9 +53,21 @@ Eintrag aus dem Feld 'verfuegbare_quelldateien_fuer_source_file' des \
 jeweiligen Projekts entsprechen (z.B. "Neues_Projekt_blog.txt") -- NICHT \
 ein generisches Label wie "blog" oder "contentplan". Ohne belastbares \
 Quellmaterial keinen Vorschlag machen.
-- Texte (draft_title/draft_location/draft_excerpt/draft_image_alt) sollen \
-sich an den in SCHEMA-GRENZWERTEN mitgelieferten Textlaengen orientieren; \
-die endgueltige Pruefung erfolgt spaeter technisch.
+- Achte bei Bildkandidaten auf Feld 'ausrichtung' (querformat/hochformat/ \
+quadratisch) jedes Bildes: Hero und Reisen brauchen breite, eher \
+querformatige Motive; die Fotografie-Kategorien Natur/Details vertragen \
+auch hochformatige Motive gut. Schlage keine offensichtlich unpassende \
+Ausrichtung vor (z.B. ein sehr hochformatiges Portraet fuer Hero).
+- Reisen-Kandidaten UND Journal-Vorschlaege brauchen zusaetzlich zum \
+kurzen Excerpt einen laengeren 'draft_body'/'body': mehrere Saetze bis \
+2-3 kurze Absaetze (ca. 400-1800 Zeichen), verdichtet oder woertlich \
+uebernommen aus dem tatsaechlichen Blog-/Contentplan-Text des Projekts \
+(Einleitung/Absaetze/Zusammenfassung) -- das wird die Grundlage einer \
+eigenen Beitragsseite. Nichts hinzuerfinden, was nicht im Quelltext steht. \
+Fuer Fotografie-Kandidaten ist draft_body nicht relevant (kann null sein).
+- Texte (draft_title/draft_location/draft_excerpt/draft_body/ \
+draft_image_alt) sollen sich an den in SCHEMA-GRENZWERTEN mitgelieferten \
+Textlaengen orientieren; die endgueltige Pruefung erfolgt spaeter technisch.
 - text_rationale: kurze, nachvollziehbare, quellengestuetzte Begruendung \
 (1-2 Saetze), keine ausfuehrliche Gedankenkette.
 - Findest du fuer einen Bereich keine geeigneten Kandidaten, lass das \
@@ -86,6 +98,10 @@ dann unangetastet.
 - Titel/Location/Excerpt/Alt-Text redaktionell auswaehlen oder verdichten, \
 aber ausschliesslich mit Informationen, die durch die Quelldateien belegt \
 sind. Nichts erfinden.
+- body (nur Reisen und Journal): Dir liegt hier NICHT der volle Blogtext \
+vor, nur die 'draft_body'/'body'-Entwuerfe aus Schritt 1. Uebernimm diese \
+weitgehend unveraendert (sprachlich leicht glaetten ist ok), erfinde \
+NICHTS Neues hinzu. Bei Fotografie-Entscheidungen gibt es kein body-Feld.
 - decision_basis: kurze, quellengestuetzte, fuer einen Menschen \
 nachvollziehbare Begruendung in 1-2 Saetzen -- keine ausfuehrliche interne \
 Gedankenkette.

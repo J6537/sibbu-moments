@@ -3,17 +3,44 @@ Regeln in content-schema.json. Zielmasse/Seitenverhaeltnis/Formate/
 Groessenlimits werden zur Laufzeit aus dem Schema gelesen, nicht
 hartkodiert.
 
+Wichtig -- EXIF-Ausrichtung: Viele Fotos (v.a. von Smartphones) speichern
+die Pixeldaten in der Sensor-Ausrichtung und legen die tatsaechlich
+beabsichtigte Ausrichtung nur im EXIF-Feld 'Orientation' ab. Wird das
+ignoriert, wird ein Hochformat-Foto wie ein Querformat-Rohbild behandelt --
+Zuschnitt und Endergebnis erscheinen dann seitlich verdreht. Deshalb wird
+JEDES Bild vor jeder weiteren Verarbeitung ueber ImageOps.exif_transpose()
+in die korrekte Ausrichtung gebracht; das WebP-Ergebnis enthaelt danach
+keine EXIF-Rotation mehr und wird von jedem Browser unveraendert (nicht
+zusaetzlich gedreht) dargestellt.
+
 Wasserzeichen werden nur angewendet, wenn content-schema.json ->
 watermark.watermark_enabled == true ist (aktuell false, also No-Op).
 """
 
 import shutil
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Tuple
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 from . import config
+
+# Anteil der kuerzeren Kante, der beim Zuschnitt auf das Ziel-Seitenverhaeltnis
+# mindestens erhalten bleiben muss. Wird er unterschritten (z.B. Hochformat-
+# Motiv soll in einen sehr breiten Hero-Slot), gilt das Bild als fuer den
+# Slot ungeeignet -- siehe ImageUnsuitableError.
+MIN_RETAIN_FRACTION = 0.45
+
+_EXIF_ORIENTATION_TAG = 274
+_ROTATE_ORIENTATIONS = {5, 6, 7, 8}
+
+
+class ImageUnsuitableError(ValueError):
+    """Ein Bild ist fuer den Ziel-Slot geometrisch ungeeignet (Zuschnitt
+    wuerde zu viel verwerfen bzw. das Motiv falsch wirken lassen). Aufrufer
+    sollen in diesem Fall ein anderes Bild waehlen oder den bestehenden
+    Website-Inhalt unveraendert lassen -- niemals ein schlecht zugeschnittenes
+    Bild veroeffentlichen."""
 
 
 def get_section_image_rules(content_schema: dict, section: str, slot_position: Optional[int] = None) -> dict:
@@ -37,9 +64,53 @@ def get_section_image_rules(content_schema: dict, section: str, slot_position: O
     return rules
 
 
-def _parse_ratio(ratio_str: str) -> float:
+def parse_ratio(ratio_str: str) -> float:
     w, h = ratio_str.split(":")
     return float(w) / float(h)
+
+
+def target_ratio_for_rules(rules: dict) -> float:
+    """Leitet das tatsaechliche Ziel-Seitenverhaeltnis vorrangig aus
+    target_width/target_height ab (nicht aus dem separaten
+    'aspect_ratio'-Textfeld -- bei hero weichen target_width/target_height
+    (16:9) und aspect_ratio_preferred (21:9) in content-schema.json
+    voneinander ab; ein Crop nach dem Textfeld wuerde beim Resize auf die
+    Zielpixelmasse verzerren)."""
+    target_w = rules.get("target_width")
+    target_h = rules.get("target_height")
+    if target_w and target_h:
+        return target_w / target_h
+    return parse_ratio(rules["aspect_ratio"])
+
+
+def oriented_dimensions(path: Path) -> Tuple[int, int]:
+    """Liefert (Breite, Hoehe) so, wie das Bild nach Anwendung der
+    EXIF-Ausrichtung tatsaechlich erscheint -- ohne die vollen Pixeldaten
+    zu dekodieren (nur Kopfdaten). Wird fuer die Kandidatenauswahl der KI
+    verwendet (discover.py)."""
+    with Image.open(path) as img:
+        w, h = img.size
+        try:
+            orientation = img.getexif().get(_EXIF_ORIENTATION_TAG)
+        except Exception:
+            orientation = None
+    if orientation in _ROTATE_ORIENTATIONS:
+        return h, w
+    return w, h
+
+
+def crop_retain_fraction(source_size: Tuple[int, int], target_ratio: float) -> float:
+    """Welcher Anteil der kuerzeren Kante bleibt bei einem zentrierten
+    Zuschnitt auf 'target_ratio' erhalten (1.0 = kein Verlust)."""
+    w, h = source_size
+    current_ratio = w / h
+    if current_ratio > target_ratio:
+        return (h * target_ratio) / w
+    return (w / target_ratio) / h
+
+
+def is_suitable_for_ratio(source_size: Tuple[int, int], target_ratio: float, min_retain_fraction: float = MIN_RETAIN_FRACTION) -> bool:
+    return crop_retain_fraction(source_size, target_ratio) >= min_retain_fraction
 
 
 def _center_crop_to_ratio(img: Image.Image, target_ratio: float) -> Image.Image:
@@ -97,25 +168,33 @@ def process_image(source_path: Path, rules: dict, target_basename: str) -> dict:
     """Schneidet/skaliert/komprimiert ein Quellbild gemaess 'rules' und legt
     Web- (und optional Mobile-)Version unter docs/assets/images/web(+mobile)
     ab. Gibt {'image': <docs-relativer Pfad>, 'image_mobile': <Pfad>|None}
-    zurueck."""
+    zurueck.
+
+    Wirft ImageUnsuitableError, wenn das Bild fuer das Ziel-Seitenverhaeltnis
+    zu aggressiv zugeschnitten werden muesste (siehe MIN_RETAIN_FRACTION) --
+    es wird dann bewusst NICHT geschrieben, statt falsch/verzerrt zu wirken."""
     if not rules or (not rules.get("aspect_ratio") and not (rules.get("target_width") and rules.get("target_height"))):
         raise ValueError(f"Keine Bildregeln fuer target_basename={target_basename} gefunden.")
 
+    ratio = target_ratio_for_rules(rules)
     target_w = rules.get("target_width")
     target_h = rules.get("target_height")
-    if target_w and target_h:
-        # Verhaeltnis aus den tatsaechlichen Zielpixelmassen ableiten, nicht
-        # aus dem separaten 'aspect_ratio'-Textfeld -- bei hero weichen
-        # target_width/target_height (16:9) und aspect_ratio_preferred
-        # (21:9) in content-schema.json voneinander ab; ein Crop nach dem
-        # Textfeld wuerde beim Resize auf die Zielpixelmasse verzerren.
-        ratio = target_w / target_h
-    else:
-        ratio = _parse_ratio(rules["aspect_ratio"])
     max_kb = rules.get("max_file_size_kb") or 500
 
-    with Image.open(source_path) as original:
-        original = original.convert("RGB")
+    with Image.open(source_path) as raw:
+        # EXIF-Ausrichtung ZUERST anwenden -- alles Folgende arbeitet auf der
+        # tatsaechlich korrekten, aufrechten Bildorientierung.
+        oriented = ImageOps.exif_transpose(raw)
+        original = oriented.convert("RGB")
+
+        retain = crop_retain_fraction(original.size, ratio)
+        if retain < MIN_RETAIN_FRACTION:
+            raise ImageUnsuitableError(
+                f"{source_path.name}: Seitenverhaeltnis {original.size[0]}x{original.size[1]} "
+                f"passt nicht zum Ziel-Verhaeltnis {ratio:.3f} (nur {retain:.0%} der Kante "
+                f"bliebe nach Zuschnitt erhalten, Minimum {MIN_RETAIN_FRACTION:.0%})."
+            )
+
         cropped = _center_crop_to_ratio(original, ratio)
 
         web_img = cropped.resize((target_w, target_h), Image.LANCZOS) if target_w and target_h else cropped.copy()

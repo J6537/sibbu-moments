@@ -28,7 +28,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 
-from . import ai_client, ai_editor, ai_output_validator, config, content_writer, discover, git_ops, site_state_reader
+from . import ai_client, ai_editor, ai_output_validator, config, content_writer, discover, git_ops, pages, site_state_reader
 
 
 class AlreadyRunningError(RuntimeError):
@@ -171,6 +171,15 @@ def run(dry_run: bool, no_push: bool, force: bool, project_filter: str = None) -
     write_log = content_writer.apply_decisions(validation_result, projects, site_content_copy, site_state_copy, content_schema)
     for entry in write_log:
         print(f"  {entry.action} [{entry.area}/{entry.slot_key}] -> {entry.item_id}")
+
+    _print_header("4b. Beitragsseiten (Reisen-Slot 1 + Journal)")
+    page_timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H%M%SZ")
+    page_log = pages.sync_pages(site_content_copy, page_timestamp)
+    if page_log:
+        for entry in page_log:
+            print(f"  Seite geschrieben [{entry.area}] {entry.item_id} -> {entry.path}")
+    else:
+        print("  Keine Beitragsseite aktualisiert (kein Slot mit ausreichend langem Text).")
 
     site_state_copy["last_archive_fingerprint"] = fingerprint
     content_writer.save_site_files(site_content_copy, site_state_copy)

@@ -9,8 +9,12 @@
     "docs/assets/images/web/",
     "docs/assets/images/mobile/",
     "docs/assets/images/archive/",
-    "docs/assets/images/original-derived/"
+    "docs/assets/images/original-derived/",
+    "docs/reisen/",
+    "docs/journal/"
   ],
+
+  "allowed_write_paths_extension_note": "docs/reisen/ und docs/journal/ wurden nachtraeglich bewusst und manuell ergaenzt, um vom Agenten erzeugte Beitragsseiten (vollstaendige Reise-/Journal-Artikel, verlinkt ueber 'Geschichte lesen'/'Weiterlesen') abzulegen. Beide Ordner enthalten ausschliesslich generierte .html-Dateien plus ein archive/-Unterverzeichnis fuer ersetzte alte Seiten (gleiche Nie-loeschen-Policy wie bei Bildern). index.html/style.css/script.js selbst bleiben davon unberuehrt und weiterhin geschuetzt.",
 
   "protected_paths": [
     "docs/index.html",
@@ -32,7 +36,8 @@
 
   "allowed_file_extensions": {
     "images": [".jpg", ".jpeg", ".png", ".webp"],
-    "data": [".json"]
+    "data": [".json"],
+    "pages": [".html"]
   },
 
   "max_file_size_kb": {
@@ -64,7 +69,8 @@
   "archival_policy": {
     "delete_originals": false,
     "on_content_replace": "Bisheriger Datensatz (JSON-Objekt) wird vollständig nach docs/data/archive/<section>/<id>-<timestamp>.json kopiert, bevor er in site-content.json überschrieben wird.",
-    "on_image_replace": "Bisherige Bilddatei wird nach docs/assets/images/archive/ verschoben, bevor die neue Version unter demselben logischen Slot abgelegt wird."
+    "on_image_replace": "Bisherige Bilddatei wird nach docs/assets/images/archive/ verschoben, bevor die neue Version unter demselben logischen Slot abgelegt wird.",
+    "on_page_replace": "Bisherige Beitragsseite (falls vorhanden) wird nach docs/reisen/archive/ bzw. docs/journal/archive/ verschoben, bevor die neue Seite unter neuem Dateinamen abgelegt wird."
   },
 
   "scope_notes": "Dieser Agent ist ausschließlich für dieses eigenständige Website-Repository zuständig. Der bestehende, separate Content_Agent (Medienprojekt-Organisation) ist kein Bestandteil dieses Repos und wird von diesem Agenten nicht gelesen, verändert oder ausgeführt.",
