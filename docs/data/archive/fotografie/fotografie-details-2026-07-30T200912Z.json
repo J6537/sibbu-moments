@@ -1,0 +1,27 @@
+{
+  "id": "fotografie-details",
+  "section": "fotografie",
+  "title": null,
+  "subtitle": null,
+  "excerpt": null,
+  "body": null,
+  "location": null,
+  "date": null,
+  "category": "Details",
+  "tags": [
+    "details"
+  ],
+  "image": "assets/images/web/ustupu-kuna-hut-rotes-hemd.webp",
+  "image_mobile": null,
+  "image_alt": "Filzhut mit gewebtem Musterband, rotes Hemd unscharf im Hintergrund.",
+  "image_caption": null,
+  "link": null,
+  "featured": false,
+  "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+  "source_file": "ustupu-kuna-hut-rotes-hemd.jpg",
+  "created_at": "2026-07-30T00:00:00Z",
+  "updated_at": "2026-07-30T17:10:45Z",
+  "published_at": "2026-07-30T17:10:45Z",
+  "content_status": "published",
+  "fallback_art": "p4"
+}
