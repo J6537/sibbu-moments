@@ -807,6 +807,16 @@ blockquote {
   font-size: 0.82rem;
 }
 
+.footer-bottom a {
+  text-decoration: underline;
+  text-decoration-color: rgba(247, 243, 236, 0.35);
+  transition: color var(--transition-base);
+}
+
+.footer-bottom a:hover {
+  color: var(--color-cream);
+}
+
 .back-to-top {
   display: inline-flex;
   align-items: center;
@@ -962,4 +972,41 @@ blockquote {
 [data-media-slot][hidden],
 [data-fallback-art][hidden] {
   display: none !important;
+}
+
+/* ==========================================================================
+   16. Rechtstext-Seiten (Impressum) — schlichte Fließtext-Spalte im
+   bestehenden Stil, ohne eigene Komponentenklassen zu benötigen.
+   ========================================================================== */
+
+.legal-content {
+  max-width: 760px;
+  margin-inline: auto;
+  padding-top: var(--header-height);
+}
+
+.legal-content h1 {
+  font-size: clamp(2.3rem, 4vw, 3.2rem);
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.legal-content h2,
+.legal-content h3 {
+  margin-top: 2.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.legal-content p {
+  color: var(--color-ink-soft);
+  margin-bottom: 1rem;
+}
+
+.legal-content p a {
+  color: var(--color-accent-deep);
+  text-decoration: underline;
+}
+
+.legal-content p a:hover {
+  color: var(--color-ink);
 }
