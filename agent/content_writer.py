@@ -129,6 +129,37 @@ def _apply_hero(decision: Decision, projects, site_content, content_schema, time
     write_log.append(WriteLogEntry("hero", None, "update", new_item["id"], decision.decision_basis, decision.source_project, decision.image_filename))
 
 
+def _apply_ueber_uns(decision: Decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log):
+    existing = site_content.get("ueber-uns") or {}
+    project = discover.find_project_by_id(projects, decision.source_project)
+    image = discover.find_image(project, decision.image_filename)
+
+    rules = images.get_section_image_rules(content_schema, "ueber-uns")
+    basename = slugify(Path(decision.image_filename).stem)
+    processed = images.process_image(image.path, rules, basename)  # kann ImageUnsuitableError werfen -- Aufrufer faengt das ab
+
+    _archive_content_item(existing, "ueber-uns", timestamp)
+    archived_image = images.archive_existing_image(existing.get("image"), timestamp)
+
+    new_item = dict(existing)
+    new_item.update({
+        "body": decision.body,
+        "image": processed["image"],
+        "image_mobile": processed["image_mobile"],
+        "image_alt": decision.image_alt,
+        "source_project": decision.source_project,
+        "source_file": decision.image_filename,
+        "updated_at": _now_iso(),
+        "published_at": _now_iso(),
+        "content_status": "published",
+    })
+    site_content["ueber-uns"] = new_item
+    provenance_updates[processed["image"]] = {"source_project": decision.source_project, "source_file": decision.image_filename}
+    if archived_image:
+        write_log.append(WriteLogEntry("ueber_uns", None, "archived_previous_image", None, f"alte Bilddatei -> {archived_image}"))
+    write_log.append(WriteLogEntry("ueber_uns", None, "update", new_item["id"], decision.decision_basis, decision.source_project, decision.image_filename))
+
+
 def _apply_reisen(decision: Decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log):
     items = site_content["reisen"]["items"]
     idx = decision.slot_key - 1
@@ -307,6 +338,9 @@ def apply_decisions(
             if decision.area == "hero":
                 _apply_hero(decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log)
                 touched_sections.add("hero")
+            elif decision.area == "ueber_uns":
+                _apply_ueber_uns(decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log)
+                touched_sections.add("ueber-uns")
             elif decision.area == "reisen":
                 _apply_reisen(decision, projects, site_content, content_schema, timestamp, used_ids, provenance_updates, write_log)
                 touched_sections.add("reisen")

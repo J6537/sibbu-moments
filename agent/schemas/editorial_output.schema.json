@@ -16,6 +16,19 @@
       },
       "required": ["action", "source_project", "image_filename", "subtitle", "excerpt", "image_alt", "decision_basis"]
     },
+    "ueber_uns_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "action": { "type": "string", "enum": ["update", "keep"] },
+        "source_project": { "type": ["string", "null"] },
+        "image_filename": { "type": ["string", "null"] },
+        "body": { "type": ["string", "null"] },
+        "image_alt": { "type": ["string", "null"] },
+        "decision_basis": { "type": "string" }
+      },
+      "required": ["action", "source_project", "image_filename", "body", "image_alt", "decision_basis"]
+    },
     "reisen_decision": {
       "type": "object",
       "additionalProperties": false,
@@ -64,10 +77,11 @@
   },
   "properties": {
     "hero": { "$ref": "#/$defs/hero_decision" },
+    "ueber_uns": { "$ref": "#/$defs/ueber_uns_decision" },
     "reisen": { "type": "array", "items": { "$ref": "#/$defs/reisen_decision" }, "maxItems": 4 },
     "fotografie": { "type": "array", "items": { "$ref": "#/$defs/fotografie_decision" }, "maxItems": 4 },
     "journal": { "type": "array", "items": { "$ref": "#/$defs/journal_decision" }, "maxItems": 3 },
     "content_gaps": { "type": "array", "items": { "type": "string" } }
   },
-  "required": ["hero", "reisen", "fotografie", "journal", "content_gaps"]
+  "required": ["hero", "ueber_uns", "reisen", "fotografie", "journal", "content_gaps"]
 }

@@ -131,6 +131,12 @@ def _combined_provenance(site_content: dict, site_state: dict) -> Dict[tuple, tu
         entry = provenance_map[hero_img]
         result[("hero", None)] = (entry.get("source_project"), entry.get("source_file"))
 
+    ueber_uns_item = site_content.get("ueber-uns") or {}
+    ueber_uns_img = ueber_uns_item.get("image")
+    if ueber_uns_img and ueber_uns_img in provenance_map:
+        entry = provenance_map[ueber_uns_img]
+        result[("ueber_uns", None)] = (entry.get("source_project"), entry.get("source_file"))
+
     reisen_items = (site_content.get("reisen") or {}).get("items", [])
     for idx, item in enumerate(reisen_items, start=1):
         img = item.get("image")
@@ -213,6 +219,71 @@ def _validate_hero(entry: dict, projects, content_schema, provenance, claimed, r
         source_project=entry.get("source_project"), image_filename=entry.get("image_filename"),
         subtitle=entry.get("subtitle"), excerpt=entry.get("excerpt"), image_alt=entry.get("image_alt"),
         decision_basis=entry.get("decision_basis", ""),
+    ))
+
+
+def _validate_ueber_uns(entry: Optional[dict], projects, content_schema, provenance, claimed, result: ValidationResult, already_locked: bool, allow_replace: bool):
+    """Ueber-uns ist bewusst stabil: Ist der Slot bereits aus einem echten
+    Projekt befuellt (source_project gesetzt), wird er NICHT mehr veraendert
+    -- unabhaengig davon, was die KI vorschlaegt. Das ist eine feste,
+    deterministische Sperre (kein reines Prompt-Verhalten), da Reisen/
+    Journal gezeigt haben, dass sich die KI allein auf Anweisungen nicht
+    zuverlaessig verlassen laesst. Nur mit allow_replace=True (CLI-Flag)
+    kann diese Sperre bewusst aufgehoben werden."""
+    if already_locked and not allow_replace:
+        return
+
+    if not isinstance(entry, dict):
+        return
+    action = entry.get("action")
+    if action != "update":
+        return
+
+    project, image = _resolve_image(projects, entry.get("source_project"), entry.get("image_filename"))
+    if project is None or image is None:
+        result.rejected.append(Rejection("ueber_uns", None, "source_project/image_filename nicht im Archiv auffindbar", entry))
+        result.content_gaps.append("ueber-uns: KI-Vorschlag verworfen (Bildreferenz nicht auffindbar)")
+        return
+
+    rules = _section_rules(content_schema, "ueber-uns")
+    image_rules = images.get_section_image_rules(content_schema, "ueber-uns")
+    geometry_reason = _geometry_reason(image, images.target_ratio_for_rules(image_rules) if image_rules else None)
+    if geometry_reason:
+        result.rejected.append(Rejection("ueber_uns", None, geometry_reason, entry))
+        result.content_gaps.append(f"ueber-uns: KI-Vorschlag verworfen ({geometry_reason}) -- bestehender Inhalt bleibt aktiv")
+        return
+
+    body = entry.get("body")
+    if not _nonempty(body) or not _len_ok(body, rules.get("body_max_len")):
+        result.rejected.append(Rejection("ueber_uns", None, "body fehlt oder ueberschreitet body_max_len", entry))
+        result.content_gaps.append("ueber-uns: KI-Vorschlag verworfen (body ungueltig)")
+        return
+    body_min = rules.get("body_min_len")
+    if body_min and len(body) < body_min:
+        # Anders als bei reisen/journal ist das hier ein hartes Kriterium:
+        # ueber-uns wird nach dieser Entscheidung dauerhaft gesperrt, ein zu
+        # duenner Text sollte deshalb nicht die einmalige Chance verbrauchen.
+        result.rejected.append(Rejection("ueber_uns", None, "body unterschreitet body_min_len", entry))
+        result.content_gaps.append("ueber-uns: KI-Vorschlag verworfen (body zu kurz)")
+        return
+    if not _nonempty(entry.get("image_alt")):
+        result.rejected.append(Rejection("ueber_uns", None, "image_alt fehlt", entry))
+        result.content_gaps.append("ueber-uns: KI-Vorschlag verworfen (image_alt fehlt)")
+        return
+
+    key = (entry.get("source_project"), entry.get("image_filename"))
+    own_slot = ("ueber_uns", None)
+    dup_reason = _check_duplicate(key, own_slot, provenance, claimed)
+    if dup_reason:
+        result.rejected.append(Rejection("ueber_uns", None, dup_reason, entry))
+        result.content_gaps.append(f"ueber-uns: KI-Vorschlag verworfen ({dup_reason})")
+        return
+
+    claimed[key] = own_slot
+    result.decisions.append(Decision(
+        area="ueber_uns", slot_key=None, action="update",
+        source_project=entry.get("source_project"), image_filename=entry.get("image_filename"),
+        body=body, image_alt=entry.get("image_alt"), decision_basis=entry.get("decision_basis", ""),
     ))
 
 
@@ -398,7 +469,7 @@ def _validate_journal(entries: List[dict], projects, content_schema, result: Val
         ))
 
 
-def validate(editorial: dict, projects, site_content: dict, site_state: dict, content_schema: dict) -> ValidationResult:
+def validate(editorial: dict, projects, site_content: dict, site_state: dict, content_schema: dict, allow_ueber_uns_replace: bool = False) -> ValidationResult:
     result = ValidationResult()
     result.content_gaps.extend(editorial.get("content_gaps", []) or [])
 
@@ -408,6 +479,9 @@ def validate(editorial: dict, projects, site_content: dict, site_state: dict, co
     hero_entry = editorial.get("hero")
     if isinstance(hero_entry, dict):
         _validate_hero(hero_entry, projects, content_schema, provenance, claimed, result)
+
+    ueber_uns_locked = bool((site_content.get("ueber-uns") or {}).get("source_project"))
+    _validate_ueber_uns(editorial.get("ueber_uns"), projects, content_schema, provenance, claimed, result, ueber_uns_locked, allow_ueber_uns_replace)
 
     _validate_reisen(editorial.get("reisen", []) or [], projects, content_schema, provenance, claimed, result)
 

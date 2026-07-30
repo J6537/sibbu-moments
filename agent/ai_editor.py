@@ -6,8 +6,8 @@ Kandidatenliste je Zielbereich.
 
 Aufruf 2 (Endauswahl, Vision): erhaelt ausschliesslich diese Kandidaten als
 echte Bilder (Base64, herunterskaliert) und trifft daraus die endgueltige,
-zusammenhaengende redaktionelle Entscheidung fuer Hero/Reisen/Fotografie/
-Journal.
+zusammenhaengende redaktionelle Entscheidung fuer Hero/Ueber-uns/Reisen/
+Fotografie/Journal.
 
 Die KI schreibt an keiner Stelle selbst eine Datei -- sie liefert
 ausschliesslich JSON zurueck, das anschliessend von ai_output_validator.py
@@ -29,11 +29,11 @@ Du bist der redaktionelle Assistent fuer die Website "Sibbu Moments" \
 
 Aufgabe in diesem ersten Schritt: Erstelle aus den bereitgestellten \
 Medienprojekten (Texte und bereits vorhandene Bildbeschreibungen, KEINE \
-echten Bilder) eine begrenzte Shortlist geeigneter Kandidaten fuer vier \
-Website-Bereiche: Hero (ein grosses Titelbild), Reisen (bis zu 4 \
-Reiseziel-Karten), Fotografie (die vier festen Kategorien Natur, \
-Unterwegs, Menschen, Details) sowie Themenvorschlaege fuer Journal (kein \
-Bild, nur Text).
+echten Bilder) eine begrenzte Shortlist geeigneter Kandidaten fuer fuenf \
+Website-Bereiche: Hero (ein grosses Titelbild), Ueber-uns (Bild + \
+Fliesstext, siehe unten), Reisen (bis zu 4 Reiseziel-Karten), Fotografie \
+(die vier festen Kategorien Natur, Unterwegs, Menschen, Details) sowie \
+Themenvorschlaege fuer Journal (kein Bild, nur Text).
 
 Regeln:
 - Verwende ausschliesslich Informationen aus den bereitgestellten \
@@ -43,6 +43,16 @@ bereits aktiv verwendet werden (active_image_paths), es sei denn, du \
 schlaegst bewusst vor, den betroffenen Slot unveraendert zu lassen.
 - Reisen-Kandidaten sollen aus Projekten mit erkennbarem Reiseziel-Charakter \
 stammen (konkreter Ort, Reiseerlebnis).
+- Ueber-uns-Kandidaten: suche nach einem Projekt, dessen Kontext-/Blogtext \
+eher eine ALLGEMEINE, persoenliche Vorstellung ist (wer/was steckt hinter \
+Sibbu Moments, warum die Leidenschaft fuer Reisen/Natur/Fotografie) statt \
+einer einzelnen konkreten Reise/einem einzelnen Ort. Falls kein solches \
+Projekt existiert, ueber_uns_candidates leer lassen -- erfinde keinen \
+falschen Ueber-uns-Charakter fuer ein normales Reiseprojekt. Falls das \
+AKTUELLE WEBSITE-ZUSTAND fuer ueber-uns bereits ein source_project zeigt, \
+ist der Slot bereits befuellt und gesperrt -- trotzdem darfst du hoechstens \
+einen Kandidaten vorschlagen, falls einer offensichtlich ist, das wird \
+dann aber ohnehin nicht automatisch uebernommen.
 - Fotografie-Kandidaten: ordne jeden Bildkandidaten genau einer der vier \
 Kategorien zu -- Menschen (Personen sind das Motiv), Unterwegs \
 (Fortbewegung/Transport/Wegsituation), Natur (Landschaft/Tiere/Pflanzen \
@@ -58,13 +68,15 @@ quadratisch) jedes Bildes: Hero und Reisen brauchen breite, eher \
 querformatige Motive; die Fotografie-Kategorien Natur/Details vertragen \
 auch hochformatige Motive gut. Schlage keine offensichtlich unpassende \
 Ausrichtung vor (z.B. ein sehr hochformatiges Portraet fuer Hero).
-- Reisen-Kandidaten UND Journal-Vorschlaege brauchen zusaetzlich zum \
-kurzen Excerpt einen laengeren 'draft_body'/'body': mehrere Saetze bis \
-2-3 kurze Absaetze (ca. 400-1800 Zeichen), verdichtet oder woertlich \
-uebernommen aus dem tatsaechlichen Blog-/Contentplan-Text des Projekts \
-(Einleitung/Absaetze/Zusammenfassung) -- das wird die Grundlage einer \
-eigenen Beitragsseite. Nichts hinzuerfinden, was nicht im Quelltext steht. \
-Fuer Fotografie-Kandidaten ist draft_body nicht relevant (kann null sein).
+- Reisen-Kandidaten, Journal-Vorschlaege UND Ueber-uns-Kandidaten brauchen \
+zusaetzlich zum kurzen Excerpt einen laengeren 'draft_body'/'body': mehrere \
+Saetze bis 2-3 kurze Absaetze, verdichtet oder woertlich uebernommen aus \
+dem tatsaechlichen Blog-/Contentplan-/Kontexttext des Projekts -- das wird \
+die Grundlage einer eigenen Beitragsseite bzw. bei Ueber-uns des \
+Fliesstexts. Fuer Ueber-uns gilt eine engere Grenze: 80-600 Zeichen (siehe \
+SCHEMA-GRENZWERTEN, content-schema.json -> ueber-uns -> body_min_len/ \
+body_max_len). Nichts hinzuerfinden, was nicht im Quelltext steht. Fuer \
+Fotografie-Kandidaten ist draft_body nicht relevant (kann null sein).
 - Texte (draft_title/draft_location/draft_excerpt/draft_body/ \
 draft_image_alt) sollen sich an den in SCHEMA-GRENZWERTEN mitgelieferten \
 Textlaengen orientieren; die endgueltige Pruefung erfolgt spaeter technisch.
@@ -81,15 +93,23 @@ Du erhaeltst die in Schritt 1 vorausgewaehlten Bildkandidaten jetzt als \
 ECHTE Bilder, zusammen mit ihren Textentwuerfen, dem aktuellen \
 Website-Zustand und den Journal-Themenvorschlaegen aus Schritt 1.
 
-Triff die endgueltige redaktionelle Auswahl fuer Hero, Reisen, Fotografie \
-und Journal als EINE zusammenhaengende Entscheidung:
+Triff die endgueltige redaktionelle Auswahl fuer Hero, Ueber-uns, Reisen, \
+Fotografie und Journal als EINE zusammenhaengende Entscheidung:
 
 - Beurteile Hauptmotiv, Bildwirkung und Eignung fuer den jeweiligen \
 Website-Bereich anhand des tatsaechlichen Bildinhalts, nicht nur anhand \
 der Textbeschreibung aus Schritt 1.
-- Hero: hoechstens 1 Bild. Reisen: bis zu 4, Position 1 ist die \
+- Hero: hoechstens 1 Bild. Ueber-uns: hoechstens 1 Bild (quadratisch \
+zuschneidbar, eher ein ruhiges/portraet-artiges oder symbolisches Motiv als \
+eine actionreiche Reiseszene). Reisen: bis zu 4, Position 1 ist die \
 grossformatige Hauptkarte. Fotografie: jede der vier Kategorien \
 (Natur/Unterwegs/Menschen/Details) hoechstens einmal.
+- WICHTIG -- Ueber-uns ist bewusst stabil: Zeigt der AKTUELLE \
+WEBSITE-ZUSTAND fuer ueber-uns bereits ein gesetztes source_project, ist \
+dieser Slot bereits dauerhaft befuellt und wird technisch NICHT mehr \
+veraendert, egal was du vorschlaegst -- setze in diesem Fall einfach \
+action="keep". Nur wenn ueber-uns noch KEIN source_project hat, lohnt sich \
+ein echter Vorschlag.
 - Ein Bild darf in diesem Lauf nur in genau einem finalen Slot verwendet \
 werden -- keine Mehrfachverwendung ueber Bereiche/Slots hinweg.
 - WICHTIG -- Vollstaendigkeit hat Prioritaet: Im AKTUELLEN WEBSITE-ZUSTAND \
@@ -168,6 +188,7 @@ def run_shortlist_stage(projects, ai_context, content_schema, model) -> dict:
 def _collect_unique_candidates(shortlist: dict):
     buckets = [
         ("hero", shortlist.get("hero_candidates", [])),
+        ("ueber_uns", shortlist.get("ueber_uns_candidates", [])),
         ("reisen", shortlist.get("reisen_candidates", [])),
         ("fotografie_natur", shortlist.get("fotografie_candidates_natur", [])),
         ("fotografie_unterwegs", shortlist.get("fotografie_candidates_unterwegs", [])),

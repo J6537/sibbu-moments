@@ -91,7 +91,7 @@ def _print_decision(d):
     print(f"    decision_basis: {d.decision_basis}")
 
 
-def run(dry_run: bool, no_push: bool, force: bool, project_filter: str = None) -> int:
+def run(dry_run: bool, no_push: bool, force: bool, project_filter: str = None, allow_ueber_uns_replace: bool = False) -> int:
     if not config.resolve_openai_api_key():
         print(f"FEHLER: Kein OpenAI-API-Key gefunden (Env-Var {config.OPENAI_API_KEY_ENV} oder {config.LOCAL_ENV_FILE}).")
         return 1
@@ -132,6 +132,7 @@ def run(dry_run: bool, no_push: bool, force: bool, project_filter: str = None) -
     editorial = pipeline_result["editorial"]
     print(f"Modell: {pipeline_result['model']}")
     print(f"Shortlist -- Hero: {len(shortlist.get('hero_candidates', []))}, "
+          f"Ueber-uns: {len(shortlist.get('ueber_uns_candidates', []))}, "
           f"Reisen: {len(shortlist.get('reisen_candidates', []))}, "
           f"Fotografie Natur/Unterwegs/Menschen/Details: "
           f"{len(shortlist.get('fotografie_candidates_natur', []))}/"
@@ -146,7 +147,10 @@ def run(dry_run: bool, no_push: bool, force: bool, project_filter: str = None) -
             print(f"  - {s}")
 
     _print_header("3. Technische Validierung der KI-Endauswahl")
-    validation_result = ai_output_validator.validate(editorial, projects, site_content, site_state, content_schema)
+    ueber_uns_locked = bool((site_content.get("ueber-uns") or {}).get("source_project"))
+    if ueber_uns_locked and not allow_ueber_uns_replace:
+        print("(Hinweis: ueber-uns ist bereits befuellt und daher gesperrt -- KI-Vorschlaege dafuer werden ignoriert. --allow-ueber-uns-replace hebt das auf.)")
+    validation_result = ai_output_validator.validate(editorial, projects, site_content, site_state, content_schema, allow_ueber_uns_replace=allow_ueber_uns_replace)
     print(f"Validierte, anwendbare Entscheidungen: {len(validation_result.decisions)}")
     for d in validation_result.decisions:
         _print_decision(d)
@@ -238,6 +242,7 @@ def main():
     parser.add_argument("--no-push", action="store_true", help="Lokal committen, aber nicht pushen")
     parser.add_argument("--force", action="store_true", help="KI-Lauf erzwingen, auch wenn sich das Archiv seit dem letzten Lauf nicht geaendert hat")
     parser.add_argument("--project", default=None, help="Nur ein einzelnes Projekt verarbeiten (project_id, z.B. Reise/panama-kuna-yala-ustupu)")
+    parser.add_argument("--allow-ueber-uns-replace", action="store_true", help="Hebt die Sperre auf und erlaubt einen Austausch von 'Ueber uns', auch wenn der Slot bereits aus einem echten Projekt befuellt ist")
     args = parser.parse_args()
 
     try:
@@ -247,7 +252,10 @@ def main():
         return 1
 
     try:
-        return run(dry_run=args.dry_run, no_push=args.no_push, force=args.force, project_filter=args.project)
+        return run(
+            dry_run=args.dry_run, no_push=args.no_push, force=args.force,
+            project_filter=args.project, allow_ueber_uns_replace=args.allow_ueber_uns_replace,
+        )
     finally:
         release_lock(lock_fh)
 

@@ -33,6 +33,7 @@
   },
   "properties": {
     "hero_candidates": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 6 },
+    "ueber_uns_candidates": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 4 },
     "reisen_candidates": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 16 },
     "fotografie_candidates_natur": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 4 },
     "fotografie_candidates_unterwegs": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 4 },
@@ -43,6 +44,7 @@
   },
   "required": [
     "hero_candidates",
+    "ueber_uns_candidates",
     "reisen_candidates",
     "fotografie_candidates_natur",
     "fotografie_candidates_unterwegs",
