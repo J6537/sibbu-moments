@@ -1,59 +1,185 @@
 {
   "schema_version": "1.0.0",
   "description": "Agenten-Gedächtnis für Sibbu Moments. Wird NICHT auf der Website ausgegeben. Wird vom späteren lokalen Website-Pflege-Agenten gelesen und nach jedem Lauf aktualisiert. Diese Erstversion beschreibt den Zustand direkt nach der technischen Umstellung auf die datenbasierte Architektur — vor dem ersten Agentenlauf.",
-
-  "last_updated": null,
-  "last_checked": null,
+  "last_updated": "2026-07-30T17:10:45Z",
+  "last_checked": "2026-07-30T17:10:45Z",
   "last_successful_test": null,
   "last_git_commit": "",
-
   "publish_status": "ready_for_review",
-
   "active_content_ids": [
-    "hero-main",
-    "zitat-main",
-    "reisen-panama-kuna-yala",
-    "reisen-norwegen-fjorde",
-    "reisen-marokko-sahara",
-    "reisen-island-gletscher",
+    "fotografie-details",
+    "fotografie-menschen",
     "fotografie-natur",
     "fotografie-unterwegs",
-    "fotografie-menschen",
-    "fotografie-details",
-    "journal-wie-eine-reise-zur-geschichte-wird",
-    "journal-leicht-packen-weit-kommen",
-    "journal-licht-das-man-nicht-planen-kann",
-    "ueber-uns-main",
+    "hero-main",
+    "journal-ustupu-in-rot-ein-leiser-tag-der-erinnerung",
+    "journal-ustupu-leise-wege-durchs-gr-n",
+    "journal-zwischen-regenwald-und-wasserstra-e-gamboa",
     "kontakt-main",
-    "seo-main"
+    "reisen-island-gletscher",
+    "reisen-marokko-sahara",
+    "reisen-norwegen-fjorde",
+    "reisen-panama-kuna-yala",
+    "seo-main",
+    "ueber-uns-main",
+    "zitat-main"
   ],
-
-  "active_image_files": [],
-
+  "active_image_files": [
+    "assets/images/mobile/achensee-vom-baerenkopf-tirol.webp",
+    "assets/images/web/achensee-vom-baerenkopf-tirol.webp",
+    "assets/images/web/kanu-mit-hund-ustupu.webp",
+    "assets/images/web/kuna-revolution-ustupu-100-jahre.webp",
+    "assets/images/web/ustupu-kuna-hut-rotes-hemd.webp",
+    "assets/og-image.svg"
+  ],
   "section_last_changed": {
-    "hero": "2026-07-30T00:00:00Z",
+    "hero": "2026-07-30T17:10:45Z",
     "zitat": "2026-07-30T00:00:00Z",
     "reisen": "2026-07-30T00:00:00Z",
-    "fotografie": "2026-07-30T00:00:00Z",
-    "journal": "2026-07-30T00:00:00Z",
+    "fotografie": "2026-07-30T17:10:45Z",
+    "journal": "2026-07-30T17:10:45Z",
     "ueber-uns": "2026-07-30T00:00:00Z",
     "kontakt": "2026-07-30T00:00:00Z",
     "seo": "2026-07-30T00:00:00Z"
   },
-
-  "content_source": "initial-manual-migration",
-  "used_project": null,
-
+  "content_source": "sibbu_content_agent_ai",
+  "used_project": "Kultur/ustupu-100-jahre-kuna-revolution, Kultur/ustupu-kuna-yala-indigene-kultur, Reise/gamboa-panama-kanal-nasenbaer-containerschiff, Wandern/achensee-baerenkopf-wanderung-tirol",
   "known_content_gaps": [
-    { "area": "hero", "issue": "Echtes Hero-Bild fehlt, es wird die Fallback-Illustration (Bergsilhouette mit Mond) angezeigt.", "since": "2026-07-30" },
-    { "area": "reisen", "issue": "Reisen-Slot 1 (Panama · Kuna Yala) ist als 'published' markiert, nutzt aber noch die Fallback-Illustration statt eines echten Fotos.", "since": "2026-07-30" },
-    { "area": "reisen", "issue": "Reisen-Slot 2 (Norwegen · Fjorde) verwendet Fallback-Illustration 'fjord' und hat noch kein Zielprojekt.", "since": "2026-07-30" },
-    { "area": "reisen", "issue": "Reisen-Slot 3 (Marokko · Sahara) verwendet Fallback-Illustration 'dune' und hat noch kein Zielprojekt.", "since": "2026-07-30" },
-    { "area": "reisen", "issue": "Reisen-Slot 4 (Island · Gletscher) verwendet Fallback-Illustration 'ice' und hat noch kein Zielprojekt.", "since": "2026-07-30" },
-    { "area": "fotografie", "issue": "Alle vier Fotografie-Kacheln (Natur, Unterwegs, Menschen, Details) verwenden noch Fallback-Illustrationen statt echter Fotos; keine Ortsangabe hinterlegt.", "since": "2026-07-30" },
-    { "area": "journal", "issue": "Alle drei Journal-Beiträge sind als 'draft' markiert und haben keine Zielseite (link ist null).", "since": "2026-07-30" },
-    { "area": "ueber-uns", "issue": "Bildfläche 'about-gradient' nutzt noch die Fallback-Illustration statt eines echten Fotos.", "since": "2026-07-30" }
+    {
+      "area": "Reisen",
+      "issue": "Reisen: Slots 2–4 (Norwegen, Marokko, Island) bleiben mangels passender Bilder unverändert.",
+      "since": "2026-07-30"
+    },
+    {
+      "area": "Fotografie",
+      "issue": "Fotografie: Kategorie Natur bleibt vorerst mit Fallback, da kein geeignetes Hochformat vorliegt.",
+      "since": "2026-07-30"
+    },
+    {
+      "area": "Über uns",
+      "issue": "Über uns: Bildfläche weiterhin Fallback, kein Material zur Auswahl in diesem Lauf.",
+      "since": "2026-07-30"
+    },
+    {
+      "area": "reisen Position 1",
+      "issue": "reisen Position 1: KI-Vorschlag verworfen (title ungueltig)",
+      "since": "2026-07-30"
+    }
   ],
-
-  "notes_for_next_agent_run": "Dies ist der Ausgangszustand nach der technischen Migration. Es hat noch kein automatisierter Pflege-Lauf stattgefunden. Vor dem ersten produktiven Lauf: tools/validate_site.py ausführen und last_successful_test erst nach grünem Ergebnis setzen."
+  "notes_for_next_agent_run": "Dies ist der Ausgangszustand nach der technischen Migration. Es hat noch kein automatisierter Pflege-Lauf stattgefunden. Vor dem ersten produktiven Lauf: tools/validate_site.py ausführen und last_successful_test erst nach grünem Ergebnis setzen.",
+  "used_ids": [
+    "fotografie-details",
+    "fotografie-menschen",
+    "fotografie-natur",
+    "fotografie-unterwegs",
+    "hero-main",
+    "journal-leicht-packen-weit-kommen",
+    "journal-licht-das-man-nicht-planen-kann",
+    "journal-ustupu-in-rot-ein-leiser-tag-der-erinnerung",
+    "journal-ustupu-leise-wege-durchs-gr-n",
+    "journal-wie-eine-reise-zur-geschichte-wird",
+    "journal-zwischen-regenwald-und-wasserstra-e-gamboa",
+    "kontakt-main",
+    "reisen-island-gletscher",
+    "reisen-marokko-sahara",
+    "reisen-norwegen-fjorde",
+    "reisen-panama-kuna-yala",
+    "seo-main",
+    "ueber-uns-main",
+    "zitat-main"
+  ],
+  "image_provenance": {
+    "assets/images/web/achensee-vom-baerenkopf-tirol.webp": {
+      "source_project": "Wandern/achensee-baerenkopf-wanderung-tirol",
+      "source_file": "achensee-vom-baerenkopf-tirol.jpg"
+    },
+    "assets/images/web/kanu-mit-hund-ustupu.webp": {
+      "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
+      "source_file": "kanu-mit-hund-ustupu.jpg"
+    },
+    "assets/images/web/kuna-revolution-ustupu-100-jahre.webp": {
+      "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+      "source_file": "kuna-revolution-ustupu-100-jahre.jpg"
+    },
+    "assets/images/web/ustupu-kuna-hut-rotes-hemd.webp": {
+      "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+      "source_file": "ustupu-kuna-hut-rotes-hemd.jpg"
+    }
+  },
+  "last_ai_decisions": {
+    "run_at": "2026-07-30T17:10:45Z",
+    "applied": [
+      {
+        "area": "hero",
+        "slot_key": null,
+        "action": "update",
+        "item_id": "hero-main",
+        "decision_basis": "Klarer, weitläufiger Blick mit starker Linienführung; das Bild stammt aus dem Achensee/Bärenkopf‑Projekt und eignet sich gut für den breiten Hero‑Crop.",
+        "source_project": "Wandern/achensee-baerenkopf-wanderung-tirol",
+        "source_file": "achensee-vom-baerenkopf-tirol.jpg"
+      },
+      {
+        "area": "fotografie",
+        "slot_key": "Unterwegs",
+        "action": "replace",
+        "item_id": "fotografie-unterwegs",
+        "decision_basis": "Motiv „Unterwegs auf dem Wasser“ ist zentral im Projekt; das Hochformat passt für den 4:5‑Zuschnitt.",
+        "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
+        "source_file": "kanu-mit-hund-ustupu.jpg"
+      },
+      {
+        "area": "fotografie",
+        "slot_key": "Menschen",
+        "action": "replace",
+        "item_id": "fotografie-menschen",
+        "decision_basis": "Reportage‑Kontext ist klar belegt; das ruhige Porträt funktioniert als Menschen‑Kachel.",
+        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+        "source_file": "kuna-revolution-ustupu-100-jahre.jpg"
+      },
+      {
+        "area": "fotografie",
+        "slot_key": "Details",
+        "action": "replace",
+        "item_id": "fotografie-details",
+        "decision_basis": "Klares Close‑up der Muster/Materialien; für den tall‑Slot vertikal gut zuschneidbar.",
+        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+        "source_file": "ustupu-kuna-hut-rotes-hemd.jpg"
+      },
+      {
+        "area": "journal",
+        "slot_key": 1,
+        "action": "replace",
+        "item_id": "journal-ustupu-in-rot-ein-leiser-tag-der-erinnerung",
+        "decision_basis": "Titel und Teaser stammen direkt aus dem Blogentwurf des Projekts.",
+        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+        "source_file": "Kuna _blog.txt"
+      },
+      {
+        "area": "journal",
+        "slot_key": 2,
+        "action": "replace",
+        "item_id": "journal-ustupu-leise-wege-durchs-gr-n",
+        "decision_basis": "Formulierungen und Motive sind im Blogtext des Projekts belegt.",
+        "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
+        "source_file": "Neues_Projekt_blog.txt"
+      },
+      {
+        "area": "journal",
+        "slot_key": 3,
+        "action": "replace",
+        "item_id": "journal-zwischen-regenwald-und-wasserstra-e-gamboa",
+        "decision_basis": "Beschreibung der Nähe von Kanal und Wald stammt aus dem Blogentwurf.",
+        "source_project": "Reise/gamboa-panama-kanal-nasenbaer-containerschiff",
+        "source_file": "Panama Canal_blog.txt"
+      }
+    ],
+    "rejected": [
+      {
+        "area": "reisen",
+        "slot_key": 1,
+        "reason": "title fehlt oder zu lang"
+      }
+    ]
+  },
+  "last_archive_fingerprint": "26883c35898f7e13c2bda7534400824d5caa4c8bb7346112a1f45583337e223a"
 }

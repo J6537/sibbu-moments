@@ -1,0 +1,28 @@
+{
+  "id": "journal-wie-eine-reise-zur-geschichte-wird",
+  "section": "journal",
+  "title": "Wie eine Reise zur Geschichte wird",
+  "subtitle": null,
+  "excerpt": "Ein Blick hinter die Kulissen: vom ersten Foto bis zum fertigen Reisebericht.",
+  "body": null,
+  "location": null,
+  "date": null,
+  "category": null,
+  "tags": [
+    "journal",
+    "prozess"
+  ],
+  "image": null,
+  "image_mobile": null,
+  "image_alt": null,
+  "image_caption": null,
+  "link": null,
+  "featured": false,
+  "source_project": null,
+  "source_file": null,
+  "created_at": "2026-07-30T00:00:00Z",
+  "updated_at": "2026-07-30T00:00:00Z",
+  "published_at": null,
+  "content_status": "draft",
+  "fallback_art": null
+}

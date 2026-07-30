@@ -5,33 +5,35 @@
     "generator": "manual-migration",
     "notes": "Erstbefüllung: 1:1 Übertragung der bisherigen, fest im HTML stehenden Texte. Alle 'image'-Felder sind bewusst null — die bestehenden SVG-Illustrationen (fallback_art) bleiben aktiv, bis der lokale Website-Pflege-Agent echte Fotos einträgt."
   },
-
   "hero": {
     "id": "hero-main",
     "section": "hero",
     "title": "Die Welt in Momenten festgehalten.",
-    "subtitle": "Reise · Natur · Fotografie",
-    "excerpt": "Sibbu Moments sammelt Geschichten von unterwegs — ferne Küsten, stille Berge und die Augenblicke dazwischen, in denen sich eine Reise wirklich anfühlt.",
+    "subtitle": "Tirol · Achensee",
+    "excerpt": "Weites Sommerlicht, Latschen im Wind und der Achensee als ruhiger Leitfaden durchs Tal – ein Moment von Höhe und Stille.",
     "body": null,
     "location": null,
     "date": null,
     "category": null,
-    "tags": ["reise", "natur", "fotografie"],
-    "image": null,
-    "image_mobile": null,
-    "image_alt": null,
+    "tags": [
+      "reise",
+      "natur",
+      "fotografie"
+    ],
+    "image": "assets/images/web/achensee-vom-baerenkopf-tirol.webp",
+    "image_mobile": "assets/images/mobile/achensee-vom-baerenkopf-tirol.webp",
+    "image_alt": "Panoramablick vom Bärenkopf auf den türkisfarbenen Achensee, gerahmt von Latschen und Bergflanken.",
     "image_caption": null,
     "link": null,
     "featured": true,
-    "source_project": null,
-    "source_file": null,
+    "source_project": "Wandern/achensee-baerenkopf-wanderung-tirol",
+    "source_file": "achensee-vom-baerenkopf-tirol.jpg",
     "created_at": "2026-07-30T00:00:00Z",
-    "updated_at": "2026-07-30T00:00:00Z",
-    "published_at": "2026-07-30T00:00:00Z",
+    "updated_at": "2026-07-30T17:10:44Z",
+    "published_at": "2026-07-30T17:10:44Z",
     "content_status": "published",
     "fallback_art": "hero-mountain-moon"
   },
-
   "zitat": {
     "id": "zitat-main",
     "section": "zitat",
@@ -57,7 +59,6 @@
     "content_status": "published",
     "fallback_art": null
   },
-
   "reisen": {
     "items": [
       {
@@ -70,7 +71,11 @@
         "location": "Panama · Kuna Yala",
         "date": null,
         "category": "reiseziel",
-        "tags": ["panama", "kuna-yala", "inseln"],
+        "tags": [
+          "panama",
+          "kuna-yala",
+          "inseln"
+        ],
         "image": null,
         "image_mobile": null,
         "image_alt": null,
@@ -95,7 +100,10 @@
         "location": "Norwegen · Fjorde",
         "date": null,
         "category": "reiseziel",
-        "tags": ["norwegen", "fjorde"],
+        "tags": [
+          "norwegen",
+          "fjorde"
+        ],
         "image": null,
         "image_mobile": null,
         "image_alt": null,
@@ -120,7 +128,11 @@
         "location": "Marokko · Sahara",
         "date": null,
         "category": "reiseziel",
-        "tags": ["marokko", "sahara", "wüste"],
+        "tags": [
+          "marokko",
+          "sahara",
+          "wüste"
+        ],
         "image": null,
         "image_mobile": null,
         "image_alt": null,
@@ -145,7 +157,10 @@
         "location": "Island · Gletscher",
         "date": null,
         "category": "reiseziel",
-        "tags": ["island", "gletscher"],
+        "tags": [
+          "island",
+          "gletscher"
+        ],
         "image": null,
         "image_mobile": null,
         "image_alt": null,
@@ -162,7 +177,6 @@
       }
     ]
   },
-
   "fotografie": {
     "items": [
       {
@@ -175,7 +189,9 @@
         "location": null,
         "date": null,
         "category": "Natur",
-        "tags": ["natur"],
+        "tags": [
+          "natur"
+        ],
         "image": null,
         "image_mobile": null,
         "image_alt": null,
@@ -200,18 +216,20 @@
         "location": null,
         "date": null,
         "category": "Unterwegs",
-        "tags": ["unterwegs"],
-        "image": null,
+        "tags": [
+          "unterwegs"
+        ],
+        "image": "assets/images/web/kanu-mit-hund-ustupu.webp",
         "image_mobile": null,
-        "image_alt": null,
+        "image_alt": "Holzkanu mit Person am Paddel und Hund am Bug auf grünem Wasserlauf bei Ustupu.",
         "image_caption": null,
         "link": null,
         "featured": false,
-        "source_project": null,
-        "source_file": null,
+        "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
+        "source_file": "kanu-mit-hund-ustupu.jpg",
         "created_at": "2026-07-30T00:00:00Z",
-        "updated_at": "2026-07-30T00:00:00Z",
-        "published_at": "2026-07-30T00:00:00Z",
+        "updated_at": "2026-07-30T17:10:44Z",
+        "published_at": "2026-07-30T17:10:44Z",
         "content_status": "published",
         "fallback_art": "p2"
       },
@@ -225,18 +243,20 @@
         "location": null,
         "date": null,
         "category": "Menschen",
-        "tags": ["menschen"],
-        "image": null,
+        "tags": [
+          "menschen"
+        ],
+        "image": "assets/images/web/kuna-revolution-ustupu-100-jahre.webp",
         "image_mobile": null,
-        "image_alt": null,
+        "image_alt": "Person in traditioneller Kleidung bei Abenddämmerung in Ustupu; Laternenlicht im Hintergrund.",
         "image_caption": null,
         "link": null,
         "featured": false,
-        "source_project": null,
-        "source_file": null,
+        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+        "source_file": "kuna-revolution-ustupu-100-jahre.jpg",
         "created_at": "2026-07-30T00:00:00Z",
-        "updated_at": "2026-07-30T00:00:00Z",
-        "published_at": "2026-07-30T00:00:00Z",
+        "updated_at": "2026-07-30T17:10:45Z",
+        "published_at": "2026-07-30T17:10:45Z",
         "content_status": "published",
         "fallback_art": "p3"
       },
@@ -250,104 +270,104 @@
         "location": null,
         "date": null,
         "category": "Details",
-        "tags": ["details"],
-        "image": null,
+        "tags": [
+          "details"
+        ],
+        "image": "assets/images/web/ustupu-kuna-hut-rotes-hemd.webp",
         "image_mobile": null,
-        "image_alt": null,
+        "image_alt": "Filzhut mit gewebtem Musterband, rotes Hemd unscharf im Hintergrund.",
         "image_caption": null,
         "link": null,
         "featured": false,
-        "source_project": null,
-        "source_file": null,
+        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+        "source_file": "ustupu-kuna-hut-rotes-hemd.jpg",
         "created_at": "2026-07-30T00:00:00Z",
-        "updated_at": "2026-07-30T00:00:00Z",
-        "published_at": "2026-07-30T00:00:00Z",
+        "updated_at": "2026-07-30T17:10:45Z",
+        "published_at": "2026-07-30T17:10:45Z",
         "content_status": "published",
         "fallback_art": "p4"
       }
     ]
   },
-
   "journal": {
     "items": [
       {
-        "id": "journal-wie-eine-reise-zur-geschichte-wird",
+        "id": "journal-ustupu-in-rot-ein-leiser-tag-der-erinnerung",
         "section": "journal",
-        "title": "Wie eine Reise zur Geschichte wird",
+        "title": "Ustupu in Rot – Ein leiser Tag der Erinnerung",
         "subtitle": null,
-        "excerpt": "Ein Blick hinter die Kulissen: vom ersten Foto bis zum fertigen Reisebericht.",
+        "excerpt": "Wimpel, Panflöten und rote Stoffe: Ustupu erinnert an 100 Jahre Kuna‑Revolution – leise, würdevoll und nah am Alltag.",
         "body": null,
         "location": null,
         "date": null,
         "category": null,
-        "tags": ["journal", "prozess"],
+        "tags": [],
         "image": null,
         "image_mobile": null,
         "image_alt": null,
         "image_caption": null,
         "link": null,
         "featured": false,
-        "source_project": null,
-        "source_file": null,
-        "created_at": "2026-07-30T00:00:00Z",
-        "updated_at": "2026-07-30T00:00:00Z",
+        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+        "source_file": "Kuna _blog.txt",
+        "created_at": "2026-07-30T17:10:45Z",
+        "updated_at": "2026-07-30T17:10:45Z",
         "published_at": null,
         "content_status": "draft",
         "fallback_art": null
       },
       {
-        "id": "journal-leicht-packen-weit-kommen",
+        "id": "journal-ustupu-leise-wege-durchs-gr-n",
         "section": "journal",
-        "title": "Leicht packen, weit kommen",
+        "title": "Ustupu – leise Wege durchs Grün",
         "subtitle": null,
-        "excerpt": "Gedanken zu minimalistischem Reisegepäck für Fotografie unterwegs.",
+        "excerpt": "Molas im Dorflicht, Boote als Wege, ein Mann am Palmenstamm und ein schwarzer Bussard im Blätterdach – Notizen eines ruhigen Tages.",
         "body": null,
         "location": null,
         "date": null,
         "category": null,
-        "tags": ["journal", "ausrüstung"],
+        "tags": [],
         "image": null,
         "image_mobile": null,
         "image_alt": null,
         "image_caption": null,
         "link": null,
         "featured": false,
-        "source_project": null,
-        "source_file": null,
-        "created_at": "2026-07-30T00:00:00Z",
-        "updated_at": "2026-07-30T00:00:00Z",
+        "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
+        "source_file": "Neues_Projekt_blog.txt",
+        "created_at": "2026-07-30T17:10:45Z",
+        "updated_at": "2026-07-30T17:10:45Z",
         "published_at": null,
         "content_status": "draft",
         "fallback_art": null
       },
       {
-        "id": "journal-licht-das-man-nicht-planen-kann",
+        "id": "journal-zwischen-regenwald-und-wasserstra-e-gamboa",
         "section": "journal",
-        "title": "Licht, das man nicht planen kann",
+        "title": "Zwischen Regenwald und Wasserstraße – Gamboa",
         "subtitle": null,
-        "excerpt": "Über das Warten auf den einen Moment, der ein Bild erst zum Bild macht.",
+        "excerpt": "Frachter am Panama‑Kanal, ein suchender Nasenbär im Unterholz und ein Aguti im Sprenkellicht – zwei Welten auf wenigen Schritten.",
         "body": null,
         "location": null,
         "date": null,
         "category": null,
-        "tags": ["journal", "fotografie"],
+        "tags": [],
         "image": null,
         "image_mobile": null,
         "image_alt": null,
         "image_caption": null,
         "link": null,
         "featured": false,
-        "source_project": null,
-        "source_file": null,
-        "created_at": "2026-07-30T00:00:00Z",
-        "updated_at": "2026-07-30T00:00:00Z",
+        "source_project": "Reise/gamboa-panama-kanal-nasenbaer-containerschiff",
+        "source_file": "Panama Canal_blog.txt",
+        "created_at": "2026-07-30T17:10:45Z",
+        "updated_at": "2026-07-30T17:10:45Z",
         "published_at": null,
         "content_status": "draft",
         "fallback_art": null
       }
     ]
   },
-
   "ueber-uns": {
     "id": "ueber-uns-main",
     "section": "ueber-uns",
@@ -373,7 +393,6 @@
     "content_status": "published",
     "fallback_art": "about-gradient"
   },
-
   "kontakt": {
     "id": "kontakt-main",
     "section": "kontakt",
@@ -399,7 +418,6 @@
     "content_status": "published",
     "fallback_art": null
   },
-
   "seo": {
     "id": "seo-main",
     "section": "seo",
@@ -410,7 +428,15 @@
     "location": null,
     "date": null,
     "category": null,
-    "tags": ["Sibbu Moments", "Reiseblog", "Fotografie", "Naturfotografie", "Reisefotografie", "Fernweh", "Reisegeschichten"],
+    "tags": [
+      "Sibbu Moments",
+      "Reiseblog",
+      "Fotografie",
+      "Naturfotografie",
+      "Reisefotografie",
+      "Fernweh",
+      "Reisegeschichten"
+    ],
     "image": "assets/og-image.svg",
     "image_mobile": null,
     "image_alt": null,

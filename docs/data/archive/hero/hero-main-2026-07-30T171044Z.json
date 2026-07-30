@@ -1,0 +1,29 @@
+{
+  "id": "hero-main",
+  "section": "hero",
+  "title": "Die Welt in Momenten festgehalten.",
+  "subtitle": "Reise · Natur · Fotografie",
+  "excerpt": "Sibbu Moments sammelt Geschichten von unterwegs — ferne Küsten, stille Berge und die Augenblicke dazwischen, in denen sich eine Reise wirklich anfühlt.",
+  "body": null,
+  "location": null,
+  "date": null,
+  "category": null,
+  "tags": [
+    "reise",
+    "natur",
+    "fotografie"
+  ],
+  "image": null,
+  "image_mobile": null,
+  "image_alt": null,
+  "image_caption": null,
+  "link": null,
+  "featured": true,
+  "source_project": null,
+  "source_file": null,
+  "created_at": "2026-07-30T00:00:00Z",
+  "updated_at": "2026-07-30T00:00:00Z",
+  "published_at": "2026-07-30T00:00:00Z",
+  "content_status": "published",
+  "fallback_art": "hero-mountain-moon"
+}
