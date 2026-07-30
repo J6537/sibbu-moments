@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "image_candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "project_id": { "type": "string" },
+        "image_filename": { "type": "string" },
+        "draft_title": { "type": ["string", "null"] },
+        "draft_location": { "type": ["string", "null"] },
+        "draft_excerpt": { "type": "string" },
+        "draft_image_alt": { "type": "string" },
+        "text_rationale": { "type": "string" }
+      },
+      "required": ["project_id", "image_filename", "draft_title", "draft_location", "draft_excerpt", "draft_image_alt", "text_rationale"]
+    },
+    "journal_proposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "source_project": { "type": "string" },
+        "source_file": { "type": "string" },
+        "decision_basis": { "type": "string" }
+      },
+      "required": ["title", "excerpt", "source_project", "source_file", "decision_basis"]
+    }
+  },
+  "properties": {
+    "hero_candidates": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 6 },
+    "reisen_candidates": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 16 },
+    "fotografie_candidates_natur": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 4 },
+    "fotografie_candidates_unterwegs": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 4 },
+    "fotografie_candidates_menschen": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 4 },
+    "fotografie_candidates_details": { "type": "array", "items": { "$ref": "#/$defs/image_candidate" }, "maxItems": 4 },
+    "journal_proposals": { "type": "array", "items": { "$ref": "#/$defs/journal_proposal" }, "maxItems": 3 },
+    "content_gaps": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": [
+    "hero_candidates",
+    "reisen_candidates",
+    "fotografie_candidates_natur",
+    "fotografie_candidates_unterwegs",
+    "fotografie_candidates_menschen",
+    "fotografie_candidates_details",
+    "journal_proposals",
+    "content_gaps"
+  ]
+}

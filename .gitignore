@@ -1,0 +1,6 @@
+agent/.env.local
+agent/.run.lock
+agent/__pycache__/
+agent/**/__pycache__/
+.DS_Store
+docs/.DS_Store

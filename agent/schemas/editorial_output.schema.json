@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "hero_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "action": { "type": "string", "enum": ["update", "keep"] },
+        "source_project": { "type": ["string", "null"] },
+        "image_filename": { "type": ["string", "null"] },
+        "subtitle": { "type": ["string", "null"] },
+        "excerpt": { "type": ["string", "null"] },
+        "image_alt": { "type": ["string", "null"] },
+        "decision_basis": { "type": "string" }
+      },
+      "required": ["action", "source_project", "image_filename", "subtitle", "excerpt", "image_alt", "decision_basis"]
+    },
+    "reisen_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "position": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "action": { "type": "string", "enum": ["replace", "keep"] },
+        "source_project": { "type": ["string", "null"] },
+        "image_filename": { "type": ["string", "null"] },
+        "title": { "type": ["string", "null"] },
+        "location": { "type": ["string", "null"] },
+        "excerpt": { "type": ["string", "null"] },
+        "image_alt": { "type": ["string", "null"] },
+        "decision_basis": { "type": "string" }
+      },
+      "required": ["position", "action", "source_project", "image_filename", "title", "location", "excerpt", "image_alt", "decision_basis"]
+    },
+    "fotografie_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target_category": { "type": "string", "enum": ["Natur", "Unterwegs", "Menschen", "Details"] },
+        "action": { "type": "string", "enum": ["replace", "keep"] },
+        "source_project": { "type": ["string", "null"] },
+        "image_filename": { "type": ["string", "null"] },
+        "image_alt": { "type": ["string", "null"] },
+        "decision_basis": { "type": "string" }
+      },
+      "required": ["target_category", "action", "source_project", "image_filename", "image_alt", "decision_basis"]
+    },
+    "journal_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "slot_hint": { "type": ["integer", "null"], "minimum": 1, "maximum": 3 },
+        "action": { "type": "string", "enum": ["replace", "keep"] },
+        "title": { "type": ["string", "null"] },
+        "excerpt": { "type": ["string", "null"] },
+        "source_project": { "type": ["string", "null"] },
+        "source_file": { "type": ["string", "null"] },
+        "decision_basis": { "type": "string" }
+      },
+      "required": ["slot_hint", "action", "title", "excerpt", "source_project", "source_file", "decision_basis"]
+    }
+  },
+  "properties": {
+    "hero": { "$ref": "#/$defs/hero_decision" },
+    "reisen": { "type": "array", "items": { "$ref": "#/$defs/reisen_decision" }, "maxItems": 4 },
+    "fotografie": { "type": "array", "items": { "$ref": "#/$defs/fotografie_decision" }, "maxItems": 4 },
+    "journal": { "type": "array", "items": { "$ref": "#/$defs/journal_decision" }, "maxItems": 3 },
+    "content_gaps": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["hero", "reisen", "fotografie", "journal", "content_gaps"]
+}
