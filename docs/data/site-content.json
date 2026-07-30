@@ -62,7 +62,7 @@
   "reisen": {
     "items": [
       {
-        "id": "reisen-panama-kuna-yala-ustupu",
+        "id": "reisen-panama-kuna-yala",
         "section": "reisen",
         "title": "Ustupu – zwischen Lagune und Riff",
         "subtitle": null,
@@ -76,7 +76,7 @@
         "image_mobile": "assets/images/mobile/kanu-auf-ustupu-kuna-yala.webp",
         "image_alt": "Drei Frauen im schmalen Holzkanu auf grün schimmerndem, ruhigem Wasser vor dichtem Ufergrün in Ustupu.",
         "image_caption": null,
-        "link": "reisen/reisen-panama-kuna-yala-ustupu.html",
+        "link": "reisen/reisen-panama-kuna-yala.html",
         "featured": true,
         "source_project": "Reise/panama-kuna-yala-ustupu",
         "source_file": "kanu-auf-ustupu-kuna-yala.jpg",
@@ -87,7 +87,7 @@
         "fallback_art": "panama"
       },
       {
-        "id": "reisen-achensee-baerenkopf-wanderung-tirol",
+        "id": "reisen-norwegen-fjorde",
         "section": "reisen",
         "title": "Bärenkopf – über dem Achensee",
         "subtitle": null,
@@ -112,7 +112,7 @@
         "fallback_art": "fjord"
       },
       {
-        "id": "reisen-gamboa-panama-kanal-nasenbaer-containerschiff",
+        "id": "reisen-marokko-sahara",
         "section": "reisen",
         "title": "Gamboa – zwischen Regenwald und Kanal",
         "subtitle": null,
@@ -137,7 +137,7 @@
         "fallback_art": "dune"
       },
       {
-        "id": "reisen-kuna-yala-san-blas-palmenstrand",
+        "id": "reisen-island-gletscher",
         "section": "reisen",
         "title": "Lagune, Riff und eine ruhige Minute",
         "subtitle": null,
@@ -278,7 +278,7 @@
   "journal": {
     "items": [
       {
-        "id": "journal-ustupu-leise-wege-durchs-gr-n-2",
+        "id": "journal-wie-eine-reise-zur-geschichte-wird",
         "section": "journal",
         "title": "Ustupu – leise Wege durchs Grün",
         "subtitle": null,
@@ -292,7 +292,7 @@
         "image_mobile": null,
         "image_alt": null,
         "image_caption": null,
-        "link": "journal/journal-ustupu-leise-wege-durchs-gr-n-2.html",
+        "link": "journal/journal-wie-eine-reise-zur-geschichte-wird.html",
         "featured": false,
         "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
         "source_file": "Neues_Projekt_blog.txt",
@@ -303,7 +303,7 @@
         "fallback_art": null
       },
       {
-        "id": "journal-ein-stiller-vormittag-im-doost-bei-theisenzell",
+        "id": "journal-leicht-packen-weit-kommen",
         "section": "journal",
         "title": "Ein stiller Vormittag im Doost bei Theisenzell",
         "subtitle": null,
@@ -317,7 +317,7 @@
         "image_mobile": null,
         "image_alt": null,
         "image_caption": null,
-        "link": "journal/journal-ein-stiller-vormittag-im-doost-bei-theisenzell.html",
+        "link": "journal/journal-leicht-packen-weit-kommen.html",
         "featured": false,
         "source_project": "Landschaft/doost-theisenzell-moosfelsen-waldbach",
         "source_file": "Neues_Projekt_blog.txt",
@@ -328,7 +328,7 @@
         "fallback_art": null
       },
       {
-        "id": "journal-palmen-riff-und-eine-ruhige-minute-in-kuna-yala",
+        "id": "journal-licht-das-man-nicht-planen-kann",
         "section": "journal",
         "title": "Palmen, Riff und eine ruhige Minute in Kuna Yala",
         "subtitle": null,
@@ -342,7 +342,7 @@
         "image_mobile": null,
         "image_alt": null,
         "image_caption": null,
-        "link": "journal/journal-palmen-riff-und-eine-ruhige-minute-in-kuna-yala.html",
+        "link": "journal/journal-licht-das-man-nicht-planen-kann.html",
         "featured": false,
         "source_project": "Reise/kuna-yala-san-blas-palmenstrand",
         "source_file": "Neues_Projekt265_blog.txt",
