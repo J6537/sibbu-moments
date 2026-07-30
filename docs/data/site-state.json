@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Agenten-Gedächtnis für Sibbu Moments. Wird NICHT auf der Website ausgegeben. Wird vom späteren lokalen Website-Pflege-Agenten gelesen und nach jedem Lauf aktualisiert. Diese Erstversion beschreibt den Zustand direkt nach der technischen Umstellung auf die datenbasierte Architektur — vor dem ersten Agentenlauf.",
+
+  "last_updated": null,
+  "last_checked": null,
+  "last_successful_test": null,
+  "last_git_commit": "",
+
+  "publish_status": "ready_for_review",
+
+  "active_content_ids": [
+    "hero-main",
+    "zitat-main",
+    "reisen-panama-kuna-yala",
+    "reisen-norwegen-fjorde",
+    "reisen-marokko-sahara",
+    "reisen-island-gletscher",
+    "fotografie-natur",
+    "fotografie-unterwegs",
+    "fotografie-menschen",
+    "fotografie-details",
+    "journal-wie-eine-reise-zur-geschichte-wird",
+    "journal-leicht-packen-weit-kommen",
+    "journal-licht-das-man-nicht-planen-kann",
+    "ueber-uns-main",
+    "kontakt-main",
+    "seo-main"
+  ],
+
+  "active_image_files": [],
+
+  "section_last_changed": {
+    "hero": "2026-07-30T00:00:00Z",
+    "zitat": "2026-07-30T00:00:00Z",
+    "reisen": "2026-07-30T00:00:00Z",
+    "fotografie": "2026-07-30T00:00:00Z",
+    "journal": "2026-07-30T00:00:00Z",
+    "ueber-uns": "2026-07-30T00:00:00Z",
+    "kontakt": "2026-07-30T00:00:00Z",
+    "seo": "2026-07-30T00:00:00Z"
+  },
+
+  "content_source": "initial-manual-migration",
+  "used_project": null,
+
+  "known_content_gaps": [
+    { "area": "hero", "issue": "Echtes Hero-Bild fehlt, es wird die Fallback-Illustration (Bergsilhouette mit Mond) angezeigt.", "since": "2026-07-30" },
+    { "area": "reisen", "issue": "Reisen-Slot 1 (Panama · Kuna Yala) ist als 'published' markiert, nutzt aber noch die Fallback-Illustration statt eines echten Fotos.", "since": "2026-07-30" },
+    { "area": "reisen", "issue": "Reisen-Slot 2 (Norwegen · Fjorde) verwendet Fallback-Illustration 'fjord' und hat noch kein Zielprojekt.", "since": "2026-07-30" },
+    { "area": "reisen", "issue": "Reisen-Slot 3 (Marokko · Sahara) verwendet Fallback-Illustration 'dune' und hat noch kein Zielprojekt.", "since": "2026-07-30" },
+    { "area": "reisen", "issue": "Reisen-Slot 4 (Island · Gletscher) verwendet Fallback-Illustration 'ice' und hat noch kein Zielprojekt.", "since": "2026-07-30" },
+    { "area": "fotografie", "issue": "Alle vier Fotografie-Kacheln (Natur, Unterwegs, Menschen, Details) verwenden noch Fallback-Illustrationen statt echter Fotos; keine Ortsangabe hinterlegt.", "since": "2026-07-30" },
+    { "area": "journal", "issue": "Alle drei Journal-Beiträge sind als 'draft' markiert und haben keine Zielseite (link ist null).", "since": "2026-07-30" },
+    { "area": "ueber-uns", "issue": "Bildfläche 'about-gradient' nutzt noch die Fallback-Illustration statt eines echten Fotos.", "since": "2026-07-30" }
+  ],
+
+  "notes_for_next_agent_run": "Dies ist der Ausgangszustand nach der technischen Migration. Es hat noch kein automatisierter Pflege-Lauf stattgefunden. Vor dem ersten produktiven Lauf: tools/validate_site.py ausführen und last_successful_test erst nach grünem Ergebnis setzen."
+}

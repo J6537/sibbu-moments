@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sibbu Moments — Reise, Natur & Fotografie</title>
+  <meta name="description" content="Sibbu Moments erzählt Geschichten von unterwegs — Reisen, Natur und Fotografie, eingefangen in Bildern, Worten und Momenten, die bleiben.">
+  <meta name="keywords" content="Sibbu Moments, Reiseblog, Fotografie, Naturfotografie, Reisefotografie, Fernweh, Reisegeschichten">
+  <meta name="author" content="Sibbu Moments">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sibbu-moments.github.io/">
+
+  <!-- Sicherheit: GitHub Pages liefert keine eigenen HTTP-Header, daher als Meta-Tags.
+       Kein inline <script>/<style>, daher kein 'unsafe-inline' nötig. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sibbu Moments — Reise, Natur & Fotografie">
+  <meta property="og:description" content="Geschichten von unterwegs — Reisen, Natur und Fotografie, eingefangen in Momenten, die bleiben.">
+  <meta property="og:image" content="assets/og-image.svg">
+  <meta property="og:url" content="https://sibbu-moments.github.io/">
+  <meta property="og:locale" content="de_DE">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sibbu Moments">
+  <meta name="twitter:description" content="Reise, Natur & Fotografie — Geschichten von unterwegs.">
+  <meta name="twitter:image" content="assets/og-image.svg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="alternate icon" href="assets/favicon.svg">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-content-src="data/site-content.json">
+
+  <a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="Sibbu Moments — Startseite">
+        <svg class="brand-mark" width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <circle cx="32" cy="24" r="8" fill="#E8A24B"/>
+          <path d="M6 46 L22 28 L32 38 L42 24 L58 46 Z" fill="#F4EFE6"/>
+        </svg>
+        <span class="brand-name">Sibbu <em>Moments</em></span>
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="#reisen">Reisen</a></li>
+          <li><a href="#fotografie">Fotografie</a></li>
+          <li><a href="#journal">Journal</a></li>
+          <li><a href="#ueber-uns">Über uns</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#kontakt" class="btn btn-outline btn-small">Kontakt</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="hero-art" data-fallback-art="hero-mountain-moon" aria-hidden="true">
+        <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="heroSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0e1a1f"/>
+              <stop offset="45%" stop-color="#2c4a4a"/>
+              <stop offset="75%" stop-color="#c97a3d"/>
+              <stop offset="100%" stop-color="#f0b35c"/>
+            </linearGradient>
+            <radialGradient id="heroSun" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff3dc"/>
+              <stop offset="100%" stop-color="#f0b35c" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="1600" height="900" fill="url(#heroSky)"/>
+          <circle cx="1180" cy="330" r="230" fill="url(#heroSun)"/>
+          <circle cx="1180" cy="330" r="80" fill="#fdf1de"/>
+          <path d="M0 620 L180 480 L360 600 L520 430 L700 580 L900 400 L1100 590 L1320 440 L1600 610 L1600 900 L0 900 Z" fill="#16292b" opacity="0.92"/>
+          <path d="M0 700 L240 560 L480 680 L760 520 L1040 690 L1320 550 L1600 700 L1600 900 L0 900 Z" fill="#0d1a1c"/>
+        </svg>
+      </div>
+      <div class="hero-media" data-media-slot hidden aria-hidden="true"></div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+
+      <div class="container hero-inner" data-content-id="hero-main">
+        <p class="hero-kicker" data-field="subtitle" data-reveal>Reise · Natur · Fotografie</p>
+        <h1 data-reveal>Die Welt in<br><span class="hero-italic">Momenten</span> festgehalten.</h1>
+        <p class="hero-lede" data-field="excerpt" data-reveal>
+          Sibbu Moments sammelt Geschichten von unterwegs — ferne Küsten, stille Berge und die
+          Augenblicke dazwischen, in denen sich eine Reise wirklich anfühlt.
+        </p>
+        <div class="hero-actions" data-reveal>
+          <a href="#reisen" class="btn btn-light">Reisen entdecken</a>
+          <a href="#fotografie" class="btn btn-outline-light">Zur Fotografie</a>
+        </div>
+      </div>
+
+      <a href="#intro" class="scroll-cue" aria-label="Nach unten scrollen">
+        <span></span>
+        Scrollen
+      </a>
+    </section>
+
+    <!-- ============ EDITORIAL INTRO / ZITAT ============ -->
+    <section class="section intro-section" id="intro">
+      <div class="container intro-inner" data-content-id="zitat-main" data-reveal>
+        <span class="quote-mark" aria-hidden="true">&#8220;</span>
+        <blockquote data-field="body">
+          Jede Reise hinterlässt Spuren — wir halten sie fest, bevor sie verblassen.
+        </blockquote>
+        <cite>— <span data-field="subtitle">Sibbu Moments</span></cite>
+      </div>
+    </section>
+
+    <!-- ============ REISEN / DESTINATIONS ============ -->
+    <section class="section" id="reisen">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Reisen</p>
+          <h2>Wohin die Reise geht</h2>
+          <p class="section-lead">Ausgewählte Ziele, Geschichten und Eindrücke von unterwegs.</p>
+        </div>
+
+        <div class="story-grid" data-reveal>
+          <article class="story-card story-card--large" data-content-id="reisen-panama-kuna-yala">
+            <div class="story-art">
+              <svg data-fallback-art="panama" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="panama" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#0c3b3a"/>
+                    <stop offset="55%" stop-color="#0f6d63"/>
+                    <stop offset="100%" stop-color="#2fd0b7"/>
+                  </linearGradient>
+                </defs>
+                <rect width="800" height="600" fill="url(#panama)"/>
+                <path d="M0 430c120-60 220 40 340-10s220-90 460-20v200H0Z" fill="#083130" opacity="0.7"/>
+                <circle cx="640" cy="140" r="60" fill="#fdf1de" opacity="0.85"/>
+                <path d="M60 460q40-120 120-140t100 40" stroke="#8fe9d8" stroke-width="4" fill="none" opacity="0.5"/>
+              </svg>
+              <div class="media-slot" data-media-slot hidden></div>
+              <span class="story-status" data-field="content_status">Aktuell</span>
+            </div>
+            <div class="story-body">
+              <p class="story-place" data-field="location">Panama · Kuna Yala</p>
+              <h3 data-field="title">Ustupu — Inseln zwischen zwei Meeren</h3>
+              <p data-field="excerpt">Ein Archipel aus unzähligen kleinen Inseln, gelebter Guna-Kultur und Wasser in
+                Farben, für die es kaum Worte gibt. Die Reisegeschichte entsteht gerade.</p>
+              <a href="#" class="story-link" data-field="link">Geschichte lesen <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="story-card" data-content-id="reisen-norwegen-fjorde">
+            <div class="story-art">
+              <svg data-fallback-art="fjord" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="fjord" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#0b1622"/>
+                    <stop offset="60%" stop-color="#22415c"/>
+                    <stop offset="100%" stop-color="#6fa8c9"/>
+                  </linearGradient>
+                </defs>
+                <rect width="800" height="600" fill="url(#fjord)"/>
+                <path d="M0 380 L160 220 L280 340 L420 180 L560 350 L700 210 L800 340 L800 600 L0 600Z" fill="#0d1e2c"/>
+              </svg>
+              <div class="media-slot" data-media-slot hidden></div>
+              <span class="story-status story-status--soon" data-field="content_status">Bald</span>
+            </div>
+            <div class="story-body">
+              <p class="story-place" data-field="location">Norwegen · Fjorde</p>
+              <h3 data-field="title">Zwischen Steilwänden und Stille</h3>
+              <p data-field="excerpt">Eine Route entlang der Fjorde des Nordens — geplant für die kommende Saison.</p>
+            </div>
+          </article>
+
+          <article class="story-card" data-content-id="reisen-marokko-sahara">
+            <div class="story-art">
+              <svg data-fallback-art="dune" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="dune" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#3a1f14"/>
+                    <stop offset="55%" stop-color="#a8622f"/>
+                    <stop offset="100%" stop-color="#f0b35c"/>
+                  </linearGradient>
+                </defs>
+                <rect width="800" height="600" fill="url(#dune)"/>
+                <path d="M0 420q200-100 400-20t400 10v190H0Z" fill="#2a160e" opacity="0.55"/>
+              </svg>
+              <div class="media-slot" data-media-slot hidden></div>
+              <span class="story-status story-status--soon" data-field="content_status">Bald</span>
+            </div>
+            <div class="story-body">
+              <p class="story-place" data-field="location">Marokko · Sahara</p>
+              <h3 data-field="title">Nächte unter Wüstenhimmel</h3>
+              <p data-field="excerpt">Dünen, Kamelkarawanen und Sternenhimmel ohne Lichtverschmutzung — in Vorbereitung.</p>
+            </div>
+          </article>
+
+          <article class="story-card" data-content-id="reisen-island-gletscher">
+            <div class="story-art">
+              <svg data-fallback-art="ice" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="ice" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1b2a3a"/>
+                    <stop offset="55%" stop-color="#3d6b86"/>
+                    <stop offset="100%" stop-color="#bfe3e8"/>
+                  </linearGradient>
+                </defs>
+                <rect width="800" height="600" fill="url(#ice)"/>
+                <path d="M0 460 L200 300 L340 420 L520 260 L680 400 L800 300 L800 600 L0 600Z" fill="#12222f" opacity="0.75"/>
+              </svg>
+              <div class="media-slot" data-media-slot hidden></div>
+              <span class="story-status story-status--soon" data-field="content_status">Bald</span>
+            </div>
+            <div class="story-body">
+              <p class="story-place" data-field="location">Island · Gletscher</p>
+              <h3 data-field="title">Eisblaues Land</h3>
+              <p data-field="excerpt">Gletscherzungen, schwarzer Sand und Wasserfälle in beinahe surrealem Blau.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOTOGRAFIE ============ -->
+    <section class="section section-dark" id="fotografie">
+      <div class="container">
+        <div class="section-head section-head--light" data-reveal>
+          <p class="eyebrow eyebrow--light">Fotografie</p>
+          <h2>Bilder, die bleiben</h2>
+          <p class="section-lead section-lead--light">Ein Blick in die Kategorien, in denen Sibbu Moments unterwegs ist.</p>
+        </div>
+
+        <div class="photo-grid" data-reveal>
+          <div class="photo-tile photo-tile--tall" data-content-id="fotografie-natur">
+            <svg data-fallback-art="p1" viewBox="0 0 500 700" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#122c2b"/><stop offset="100%" stop-color="#3aa892"/></linearGradient></defs><rect width="500" height="700" fill="url(#p1)"/><path d="M0 500q120-80 250-20t250 10v210H0Z" fill="#0c211f" opacity="0.6"/></svg>
+            <div class="media-slot" data-media-slot hidden></div>
+            <div class="photo-caption"><span data-field="category">Natur</span></div>
+          </div>
+          <div class="photo-tile" data-content-id="fotografie-unterwegs">
+            <svg data-fallback-art="p2" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2b1c12"/><stop offset="100%" stop-color="#d69a52"/></linearGradient></defs><rect width="500" height="500" fill="url(#p2)"/><circle cx="360" cy="140" r="70" fill="#fdf1de" opacity="0.85"/></svg>
+            <div class="media-slot" data-media-slot hidden></div>
+            <div class="photo-caption"><span data-field="category">Unterwegs</span></div>
+          </div>
+          <div class="photo-tile" data-content-id="fotografie-menschen">
+            <svg data-fallback-art="p3" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="p3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#101c2b"/><stop offset="100%" stop-color="#5b86ad"/></linearGradient></defs><rect width="500" height="500" fill="url(#p3)"/><path d="M0 380 L150 260 L260 360 L400 220 L500 320 L500 500 L0 500Z" fill="#0b1826" opacity="0.7"/></svg>
+            <div class="media-slot" data-media-slot hidden></div>
+            <div class="photo-caption"><span data-field="category">Menschen</span></div>
+          </div>
+          <div class="photo-tile photo-tile--tall" data-content-id="fotografie-details">
+            <svg data-fallback-art="p4" viewBox="0 0 500 700" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="p4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2a1408"/><stop offset="100%" stop-color="#e8a24b"/></linearGradient></defs><rect width="500" height="700" fill="url(#p4)"/><path d="M0 520q140-70 250-10t250 20v170H0Z" fill="#1d0d05" opacity="0.55"/></svg>
+            <div class="media-slot" data-media-slot hidden></div>
+            <div class="photo-caption"><span data-field="category">Details</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ÜBER UNS ============ -->
+    <section class="section about-section" id="ueber-uns">
+      <div class="container about-grid">
+        <div class="about-art" data-fallback-art="about-gradient" data-reveal aria-hidden="true">
+          <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="about" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#122c2b"/>
+                <stop offset="100%" stop-color="#e8a24b"/>
+              </linearGradient>
+            </defs>
+            <rect width="600" height="600" rx="24" fill="url(#about)"/>
+            <circle cx="440" cy="150" r="50" fill="#fdf1de" opacity="0.85"/>
+            <path d="M0 400q140-90 260-20t340-10v230H0Z" fill="#0c211f" opacity="0.55"/>
+          </svg>
+          <div class="media-slot" data-media-slot hidden></div>
+        </div>
+        <div class="about-content" data-content-id="ueber-uns-main" data-reveal>
+          <p class="eyebrow">Über uns</p>
+          <h2>Warum Sibbu Moments</h2>
+          <p data-field="body">
+            Sibbu Moments entstand aus der einfachen Beobachtung, dass die schönsten Augenblicke
+            einer Reise selten die spektakulärsten sind — sondern die stillen dazwischen: ein Licht,
+            ein Blick, ein Ort, an dem man kurz innehält.
+          </p>
+          <p>
+            Hinter den Kulissen hilft ein selbst entwickeltes Werkzeug, der
+            <strong> Sibbu Content Agent</strong>, dabei, tausende Fotos und Videos aus jeder Reise
+            zu sichten, zu ordnen und erste Textentwürfe vorzubereiten — die eigentliche Geschichte
+            erzählt am Ende aber immer noch ein Mensch.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ JOURNAL ============ -->
+    <section class="section section-alt" id="journal">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Journal</p>
+          <h2>Neues aus dem Journal</h2>
+          <p class="section-lead">Notizen, Gedanken und kurze Geschichten von unterwegs.</p>
+        </div>
+
+        <div class="journal-grid" data-reveal>
+          <article class="journal-card" data-content-id="journal-wie-eine-reise-zur-geschichte-wird">
+            <p class="journal-date" data-field="content_status">In Vorbereitung</p>
+            <h3 data-field="title">Wie eine Reise zur Geschichte wird</h3>
+            <p data-field="excerpt">Ein Blick hinter die Kulissen: vom ersten Foto bis zum fertigen Reisebericht.</p>
+            <a href="#" class="story-link" data-field="link">Weiterlesen <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="journal-card" data-content-id="journal-leicht-packen-weit-kommen">
+            <p class="journal-date" data-field="content_status">In Vorbereitung</p>
+            <h3 data-field="title">Leicht packen, weit kommen</h3>
+            <p data-field="excerpt">Gedanken zu minimalistischem Reisegepäck für Fotografie unterwegs.</p>
+            <a href="#" class="story-link" data-field="link">Weiterlesen <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="journal-card" data-content-id="journal-licht-das-man-nicht-planen-kann">
+            <p class="journal-date" data-field="content_status">In Vorbereitung</p>
+            <h3 data-field="title">Licht, das man nicht planen kann</h3>
+            <p data-field="excerpt">Über das Warten auf den einen Moment, der ein Bild erst zum Bild macht.</p>
+            <a href="#" class="story-link" data-field="link">Weiterlesen <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ KONTAKT / NEWSLETTER ============ -->
+    <section class="section" id="kontakt">
+      <div class="container">
+        <div class="contact-panel" data-reveal>
+          <div class="contact-copy" data-content-id="kontakt-main">
+            <p class="eyebrow">Kontakt</p>
+            <h2>Bleib auf dem Laufenden</h2>
+            <p class="section-lead" data-field="excerpt">
+              Neue Reisegeschichten, Fotostrecken und Journal-Einträge — hin und wieder, ohne Spam.
+            </p>
+          </div>
+          <form class="contact-form" id="newsletter-form">
+            <label for="email-input" class="visually-hidden">E-Mail-Adresse</label>
+            <input type="email" id="email-input" name="email" placeholder="deine@email.de" required autocomplete="email">
+            <button type="submit" class="btn btn-light">Anmelden</button>
+          </form>
+          <p class="form-hint">Hinweis: Die Anmeldung ist aktuell eine Vorschau und technisch noch nicht aktiv.</p>
+          <p class="contact-note" id="newsletter-note" role="status"></p>
+
+          <div class="social-links">
+            <span class="icon-btn" role="img" aria-label="Instagram (Kanal folgt in Kürze)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            </span>
+            <span class="icon-btn" role="img" aria-label="YouTube (Kanal folgt in Kürze)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M10 9.5v5l5-2.5-5-2.5Z" fill="currentColor"/></svg>
+            </span>
+            <a href="mailto:hallo@sibbu-moments.dev" class="icon-btn" aria-label="E-Mail" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#top" class="brand" aria-label="Sibbu Moments — Startseite">
+          <svg class="brand-mark" width="30" height="30" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <circle cx="32" cy="24" r="8" fill="#E8A24B"/>
+            <path d="M6 46 L22 28 L32 38 L42 24 L58 46 Z" fill="#F4EFE6"/>
+          </svg>
+          <span class="brand-name">Sibbu <em>Moments</em></span>
+        </a>
+        <p>Reise, Natur und Fotografie — Geschichten von unterwegs.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Entdecken</h4>
+        <ul>
+          <li><a href="#reisen">Reisen</a></li>
+          <li><a href="#fotografie">Fotografie</a></li>
+          <li><a href="#journal">Journal</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Über</h4>
+        <ul>
+          <li><a href="#ueber-uns">Über uns</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Sibbu Moments. Organisiert mit dem Sibbu Content Agent.</p>
+      <button class="back-to-top" id="back-to-top" aria-label="Nach oben scrollen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5m0 0-6 6m6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

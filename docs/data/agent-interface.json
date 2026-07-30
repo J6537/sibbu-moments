@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Verbindliche Schnittstellen-Definition für den späteren lokalen Website-Pflege-Agenten dieses Projekts (Sibbu Moments). Legt fest, welche Dateien automatisiert verändert werden dürfen und welche geschützt bleiben. Diese Datei selbst ist geschützt. Dieser Agent betreut ausschließlich dieses Website-Repository, nicht den separaten Content_Agent.",
+
+  "allowed_write_paths": [
+    "docs/data/site-content.json",
+    "docs/data/site-state.json",
+    "docs/data/archive/",
+    "docs/assets/images/web/",
+    "docs/assets/images/mobile/",
+    "docs/assets/images/archive/",
+    "docs/assets/images/original-derived/"
+  ],
+
+  "protected_paths": [
+    "docs/index.html",
+    "docs/css/style.css",
+    "docs/js/script.js",
+    "docs/data/content-schema.json",
+    "docs/data/agent-interface.json",
+    "docs/assets/branding/",
+    "docs/assets/favicon.svg",
+    "docs/assets/og-image.svg",
+    "tools/validate_site.py"
+  ],
+
+  "protected_paths_notes": "Layout, Programmcode und Prüflogik bleiben geschützt, damit ein automatisierter Lauf niemals Design oder Sicherheitsregeln verändern kann. Änderungen an diesen Dateien erfordern eine bewusste, manuelle Freigabe außerhalb des automatisierten Agentenlaufs.",
+
+  "allowed_content_sections": ["hero", "zitat", "reisen", "fotografie", "journal", "ueber-uns", "kontakt"],
+  "manual_review_sections": ["seo"],
+  "manual_review_notes": "Der 'seo'-Block in site-content.json dient als redaktionelle Referenz. Da eine Umsetzung echte Meta-Tags in docs/index.html erfordern würde und index.html geschützt ist, wendet der automatisierte Agent SEO-Änderungen nicht selbst an.",
+
+  "allowed_file_extensions": {
+    "images": [".jpg", ".jpeg", ".png", ".webp"],
+    "data": [".json"]
+  },
+
+  "max_file_size_kb": {
+    "hero_image": 800,
+    "reisen_image": 500,
+    "fotografie_image": 500,
+    "ueber_uns_image": 500,
+    "default": 500
+  },
+
+  "backup_required": true,
+  "backup_location": "docs/data/archive/ (Content-Datensätze) und docs/assets/images/archive/ (Bilddateien)",
+  "backup_policy": "Vor jeder Änderung an einem sichtbaren Content-Datensatz oder Bildplatz muss der bisherige Stand unverändert archiviert werden, bevor der neue Stand geschrieben wird. Originale Bilddateien werden niemals gelöscht, nur verschoben/kopiert nach archive/.",
+
+  "validation_required_before_publish": true,
+  "validation_command": "python3 tools/validate_site.py",
+  "validation_exit_codes": {
+    "0": "Erfolgreich — Veröffentlichung/Commit darf fortgesetzt werden.",
+    "nonzero": "Fehler gefunden — kein Commit, kein Push. Änderungen bleiben lokal, bis behoben."
+  },
+
+  "on_validation_failure": "Kein Git-Commit, kein Git-Push. Der Agent protokolliert den Fehler in site-state.json (z.B. unter known_content_gaps) und bricht den Veröffentlichungsschritt ab. Bereits archivierte Vorzustände bleiben erhalten, damit der Agent oder ein Mensch zurückrollen kann.",
+
+  "git_push_policy": {
+    "push_allowed_only_if": "tools/validate_site.py beendet mit Exit-Code 0 UND alle geänderten Pfade liegen innerhalb von allowed_write_paths.",
+    "push_forbidden_if": "Validierung schlägt fehl, ODER eine geschützte Datei wurde verändert, ODER unbekannte Dateitypen/Pfade wurden eingeführt."
+  },
+
+  "archival_policy": {
+    "delete_originals": false,
+    "on_content_replace": "Bisheriger Datensatz (JSON-Objekt) wird vollständig nach docs/data/archive/<section>/<id>-<timestamp>.json kopiert, bevor er in site-content.json überschrieben wird.",
+    "on_image_replace": "Bisherige Bilddatei wird nach docs/assets/images/archive/ verschoben, bevor die neue Version unter demselben logischen Slot abgelegt wird."
+  },
+
+  "scope_notes": "Dieser Agent ist ausschließlich für dieses eigenständige Website-Repository zuständig. Der bestehende, separate Content_Agent (Medienprojekt-Organisation) ist kein Bestandteil dieses Repos und wird von diesem Agenten nicht gelesen, verändert oder ausgeführt.",
+
+  "notes": "Der spätere Agent tauscht in der Regel ausschließlich Inhalte (site-content.json) und Bilddateien aus. Layout (index.html/style.css) und Ausführungslogik (script.js, validate_site.py) bleiben unverändert, damit die redaktionelle Gestaltung dauerhaft stabil bleibt."
+}

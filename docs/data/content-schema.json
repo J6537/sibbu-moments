@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Verbindliche Regeln für die dynamischen Inhaltsbereiche von Sibbu Moments. Diese Datei wird vom Prüfskript (tools/validate_site.py) und vom späteren lokalen Website-Pflege-Agenten gelesen. Sie beschreibt Struktur und Grenzen, NICHT das Layout selbst — das Layout bleibt in index.html/style.css fest.",
+  "id_pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+  "duplicate_ids_forbidden": true,
+  "duplicate_images_forbidden_unless_flagged": true,
+
+  "common_fields": {
+    "id": { "type": "string", "required": true, "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "description": "Eindeutige, stabile Kennung, z.B. reisen-panama-kuna-yala. Wird nie wiederverwendet, auch nicht nach Archivierung." },
+    "section": { "type": "string", "required": true, "enum": ["hero", "zitat", "reisen", "fotografie", "journal", "ueber-uns", "kontakt", "seo"] },
+    "title": { "type": "string", "required": false },
+    "subtitle": { "type": "string", "required": false },
+    "excerpt": { "type": "string", "required": false, "description": "Kurztext/Teaser, wie er sichtbar auf der Karte/Fläche erscheint." },
+    "body": { "type": "string", "required": false, "description": "Längerer Fließtext, aktuell nur für ueber-uns genutzt." },
+    "location": { "type": "string", "required": false },
+    "date": { "type": "string", "required": false, "format": "ISO-8601 (YYYY-MM-DD)" },
+    "category": { "type": "string", "required": false },
+    "tags": { "type": "array", "items": "string", "required": false },
+    "image": { "type": "string|null", "required": false, "description": "Relativer Pfad ab docs/, z.B. assets/images/web/reisen-panama-01.webp. null = Fallback-SVG aktiv." },
+    "image_mobile": { "type": "string|null", "required": false, "description": "Optionaler eigener mobiler Zuschnitt, relativer Pfad ab docs/." },
+    "image_alt": { "type": "string|null", "required": false, "description": "Pflicht, sobald 'image' gesetzt ist." },
+    "image_caption": { "type": "string|null", "required": false },
+    "link": { "type": "string|null", "required": false, "description": "Erlaubt: https://..., mailto:..., '#anchor' oder interner relativer Pfad. Alles andere wird beim Rendern verworfen." },
+    "featured": { "type": "boolean", "required": false, "default": false },
+    "source_project": { "type": "string|null", "required": false, "description": "Projektordner im Medienprojekte-Archiv, aus dem der Inhalt stammt." },
+    "source_file": { "type": "string|null", "required": false, "description": "Ursprüngliche Datei (Bild/Video/Text), aus der der Inhalt abgeleitet wurde." },
+    "created_at": { "type": "string|null", "format": "ISO-8601 datetime" },
+    "updated_at": { "type": "string|null", "format": "ISO-8601 datetime" },
+    "published_at": { "type": "string|null", "format": "ISO-8601 datetime" },
+    "content_status": { "type": "string", "required": true, "enum": ["draft", "planned", "published", "archived"] },
+    "fallback_art": { "type": "string", "required": true, "description": "ID der bestehenden inline-SVG-Illustration, die angezeigt wird, solange kein 'image' gesetzt ist. Muss zu einem vorhandenen data-fallback-art in index.html passen." }
+  },
+
+  "image_rules_common": {
+    "allowed_formats": ["webp", "jpg", "jpeg", "png"],
+    "preferred_format": "webp",
+    "lazy_loading": "Alle Bilder außerhalb des Hero-Startbereichs erhalten loading=\"lazy\" decoding=\"async\". Das Hero-Bild (above the fold) wird eager geladen.",
+    "responsive_strategy": "picture-Element mit source[type=image/webp] + img-Fallback; zusätzlich optionales eigenes 'image_mobile' für abweichende mobile Bildausschnitte.",
+    "alt_required_when_image_present": true,
+    "max_file_size_kb_default": 500,
+    "allowed_path_prefixes": [
+      "assets/images/web/",
+      "assets/images/mobile/",
+      "assets/images/original-derived/"
+    ],
+    "forbidden_path_patterns": ["..", "://", "^/", "\\\\"],
+    "layout_shift_prevention": "width/height oder aspect-ratio je Bildplatz sind durch die feste CSS-Klasse des jeweiligen Slots bereits vorgegeben; keine zusätzlichen Inline-Maße nötig."
+  },
+
+  "watermark": {
+    "watermark_enabled": false,
+    "watermark_asset": null,
+    "watermark_position": "bottom-right",
+    "watermark_opacity": 0.18,
+    "watermark_scale": 0.12,
+    "allowed_positions": ["top-left", "top-right", "bottom-left", "bottom-right", "center"],
+    "applied_by": "lokaler Website-Pflege-Agent bei der Bildaufbereitung (vor Ablage in assets/images/web bzw. mobile). Der Browser/Client rendert niemals ein Wasserzeichen.",
+    "asset_location": "docs/assets/branding/"
+  },
+
+  "security_rules": {
+    "text_rendering": "Alle dynamischen Textfelder werden ausschließlich über textContent gesetzt, niemals über innerHTML.",
+    "allowed_link_protocols": ["https:", "mailto:", "internal-hash", "internal-relative"],
+    "forbidden_link_protocols": ["javascript:", "data:", "http:", "file:", "ftp:"],
+    "forbidden_patterns_in_text": ["<script", "<iframe", "javascript:", "onerror=", "onload=", "<object", "<embed", "<svg onload"],
+    "external_link_rel": "noopener noreferrer"
+  },
+
+  "sections": {
+    "hero": {
+      "max_items": 1,
+      "fixed_item_count": 1,
+      "layout": "Vollflächiges Hero mit Text-Overlay unten links über Hintergrundbild/-illustration. Struktur darf nicht verändert werden.",
+      "required_fields": ["id", "section", "content_status", "fallback_art"],
+      "optional_fields": ["title", "subtitle", "excerpt", "image", "image_mobile", "image_alt", "updated_at", "published_at"],
+      "title_max_len": 60,
+      "subtitle_max_len": 60,
+      "excerpt_max_len": 180,
+      "image": {
+        "aspect_ratio_preferred": "21:9",
+        "aspect_ratio_allowed": ["21:9", "16:9"],
+        "target_width": 2400,
+        "target_height": 1350,
+        "crop_allowed": true,
+        "mobile_variant_required": true,
+        "max_file_size_kb": 800,
+        "formats": ["webp", "jpg"],
+        "loading": "eager"
+      },
+      "allowed_categories": null,
+      "fallback_behavior": "Bestehende SVG-Illustration (Bergsilhouette mit Mond) bleibt sichtbar, solange kein 'image' gesetzt ist."
+    },
+
+    "zitat": {
+      "max_items": 1,
+      "fixed_item_count": 1,
+      "layout": "Zentriertes redaktionelles Pull-Quote zwischen Hero und Reisen-Sektion.",
+      "required_fields": ["id", "section", "body", "content_status"],
+      "optional_fields": ["subtitle"],
+      "body_min_len": 20,
+      "body_max_len": 160,
+      "notes": "Kein Bild vorgesehen. 'subtitle' kann für die Zuschreibung (cite) genutzt werden."
+    },
+
+    "reisen": {
+      "max_items": 4,
+      "fixed_item_count": 4,
+      "allow_count_change": false,
+      "layout": "Slot 1 = großformatige, featured Karte (story-card--large); Slot 2-4 = Standardkarten. Reihenfolge entspricht der Array-Reihenfolge in site-content.json.",
+      "required_fields": ["id", "section", "title", "location", "excerpt", "content_status", "fallback_art"],
+      "optional_fields": ["image", "image_mobile", "image_alt", "image_caption", "link", "tags", "date", "source_project", "source_file", "featured"],
+      "title_max_len": 70,
+      "location_max_len": 40,
+      "excerpt_min_len": 40,
+      "excerpt_max_len": 220,
+      "image": {
+        "aspect_ratio": "4:3",
+        "target_width": 1200,
+        "target_height": 900,
+        "crop_allowed": true,
+        "mobile_variant_required": true,
+        "max_file_size_kb": 500,
+        "formats": ["webp", "jpg"],
+        "loading": "lazy"
+      },
+      "allowed_categories": ["reiseziel"],
+      "link_rules": {
+        "render_only_if_valid": true,
+        "recommended_when_status": "published",
+        "protocols": ["https:", "internal-relative", "internal-hash"],
+        "note": "Der Link-Slot existiert im festen Layout nur bei Karte 1 (story-card--large). Für Karten 2-4 wird kein neuer Link-Slot automatisch ergänzt."
+      }
+    },
+
+    "fotografie": {
+      "max_items": 4,
+      "fixed_item_count": 4,
+      "allow_count_change": false,
+      "layout": "Slot 1 hochformatig (photo-tile--tall, ~4:6.2), Slot 2 standard (~4:5), Slot 3 standard (~4:5), Slot 4 hochformatig (photo-tile--tall, ~4:6.2). Reihenfolge fix.",
+      "required_fields": ["id", "section", "category", "content_status", "fallback_art"],
+      "optional_fields": ["image", "image_mobile", "image_alt", "image_caption", "title", "link", "location"],
+      "image_alt_required": true,
+      "per_slot_image_rules": [
+        { "slot": 1, "aspect_ratio": "4:6.2", "target_width": 1000, "target_height": 1550 },
+        { "slot": 2, "aspect_ratio": "4:5", "target_width": 1000, "target_height": 1250 },
+        { "slot": 3, "aspect_ratio": "4:5", "target_width": 1000, "target_height": 1250 },
+        { "slot": 4, "aspect_ratio": "4:6.2", "target_width": 1000, "target_height": 1550 }
+      ],
+      "max_file_size_kb": 500,
+      "formats": ["webp", "jpg"],
+      "loading": "lazy",
+      "allowed_categories": ["Natur", "Unterwegs", "Menschen", "Details"]
+    },
+
+    "journal": {
+      "max_items": 3,
+      "fixed_item_count": 3,
+      "allow_count_change": false,
+      "layout": "Drei gleichwertige Karten nebeneinander (Desktop) bzw. untereinander (Mobile). Kein Bildplatz im aktuellen Layout vorgesehen.",
+      "required_fields": ["id", "section", "title", "excerpt", "content_status"],
+      "optional_fields": ["link", "date", "tags", "image", "image_alt"],
+      "title_max_len": 70,
+      "excerpt_min_len": 30,
+      "excerpt_max_len": 160,
+      "image": {
+        "layout_supports_image": false,
+        "note": "Aktuelles Kartenlayout zeigt kein Bild. Format ist für eine spätere Design-Erweiterung reserviert.",
+        "aspect_ratio_reserved": "16:9"
+      },
+      "link_rules": {
+        "render_only_if_valid": true,
+        "fallback_when_missing": "Text 'Weiterlesen' wird als inaktives Element ohne href dargestellt, kein toter Link."
+      }
+    },
+
+    "ueber-uns": {
+      "max_items": 1,
+      "fixed_item_count": 1,
+      "layout": "Zweispaltig: quadratische Bildfläche links, Fließtext rechts (about-grid). Zweiter Absatz mit Erwähnung des Sibbu Content Agent bleibt fest in index.html.",
+      "required_fields": ["id", "section", "body", "content_status"],
+      "optional_fields": ["title", "image", "image_alt"],
+      "body_min_len": 80,
+      "body_max_len": 600,
+      "image": {
+        "aspect_ratio": "1:1",
+        "target_width": 1200,
+        "target_height": 1200,
+        "crop_allowed": true,
+        "mobile_variant_required": false,
+        "max_file_size_kb": 500,
+        "formats": ["webp", "jpg"],
+        "loading": "lazy"
+      }
+    },
+
+    "kontakt": {
+      "max_items": 1,
+      "fixed_item_count": 1,
+      "layout": "Zentriertes dunkles Panel mit Überschrift, Teaser und Newsletter-Formular. Formular selbst bleibt statisch/Demo.",
+      "required_fields": ["id", "section", "title", "excerpt", "content_status"],
+      "optional_fields": [],
+      "title_max_len": 60,
+      "excerpt_max_len": 160,
+      "no_image": true
+    },
+
+    "seo": {
+      "max_items": 1,
+      "fixed_item_count": 1,
+      "manual_only": true,
+      "applies_to": "docs/index.html <head> (Meta-Tags). Wird NICHT automatisch angewendet, da index.html als geschützte Datei gilt (siehe agent-interface.json). Dient als redaktionelle Referenz für manuelle Aktualisierungen.",
+      "required_fields": ["id", "section", "title", "excerpt"],
+      "optional_fields": ["tags"],
+      "title_max_len": 60,
+      "excerpt_max_len": 160
+    }
+  }
+}
