@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
   "description": "Agenten-Gedächtnis für Sibbu Moments. Wird NICHT auf der Website ausgegeben. Wird vom späteren lokalen Website-Pflege-Agenten gelesen und nach jedem Lauf aktualisiert. Diese Erstversion beschreibt den Zustand direkt nach der technischen Umstellung auf die datenbasierte Architektur — vor dem ersten Agentenlauf.",
-  "last_updated": "2026-07-30T17:10:45Z",
-  "last_checked": "2026-07-30T17:10:45Z",
+  "last_updated": "2026-07-30T20:06:50Z",
+  "last_checked": "2026-07-30T20:06:50Z",
   "last_successful_test": null,
   "last_git_commit": "",
   "publish_status": "ready_for_review",
@@ -12,57 +12,50 @@
     "fotografie-natur",
     "fotografie-unterwegs",
     "hero-main",
+    "journal-ein-stiller-vormittag-im-doost-bei-theisenzell",
     "journal-ustupu-in-rot-ein-leiser-tag-der-erinnerung",
-    "journal-ustupu-leise-wege-durchs-gr-n",
     "journal-zwischen-regenwald-und-wasserstra-e-gamboa",
     "kontakt-main",
     "reisen-island-gletscher",
     "reisen-marokko-sahara",
     "reisen-norwegen-fjorde",
-    "reisen-panama-kuna-yala",
+    "reisen-panama-kuna-yala-ustupu",
     "seo-main",
     "ueber-uns-main",
     "zitat-main"
   ],
   "active_image_files": [
-    "assets/images/mobile/achensee-vom-baerenkopf-tirol.webp",
-    "assets/images/web/achensee-vom-baerenkopf-tirol.webp",
+    "assets/images/mobile/kanu-auf-ustupu-kuna-yala.webp",
+    "assets/images/mobile/palmeninseln-kuna-yala-ustupu.webp",
+    "assets/images/web/blick-vom-baerenkopf-tirol.webp",
+    "assets/images/web/kanu-auf-ustupu-kuna-yala.webp",
     "assets/images/web/kanu-mit-hund-ustupu.webp",
     "assets/images/web/kuna-revolution-ustupu-100-jahre.webp",
+    "assets/images/web/palmeninseln-kuna-yala-ustupu.webp",
     "assets/images/web/ustupu-kuna-hut-rotes-hemd.webp",
     "assets/og-image.svg"
   ],
   "section_last_changed": {
-    "hero": "2026-07-30T17:10:45Z",
+    "hero": "2026-07-30T20:06:50Z",
     "zitat": "2026-07-30T00:00:00Z",
-    "reisen": "2026-07-30T00:00:00Z",
-    "fotografie": "2026-07-30T17:10:45Z",
-    "journal": "2026-07-30T17:10:45Z",
+    "reisen": "2026-07-30T20:06:50Z",
+    "fotografie": "2026-07-30T20:06:50Z",
+    "journal": "2026-07-30T20:06:50Z",
     "ueber-uns": "2026-07-30T00:00:00Z",
     "kontakt": "2026-07-30T00:00:00Z",
     "seo": "2026-07-30T00:00:00Z"
   },
   "content_source": "sibbu_content_agent_ai",
-  "used_project": "Kultur/ustupu-100-jahre-kuna-revolution, Kultur/ustupu-kuna-yala-indigene-kultur, Reise/gamboa-panama-kanal-nasenbaer-containerschiff, Wandern/achensee-baerenkopf-wanderung-tirol",
+  "used_project": "Landschaft/doost-theisenzell-moosfelsen-waldbach, Reise/panama-kuna-yala-ustupu, Wandern/baerenkopf-achensee-bergtour-liz-und-ich",
   "known_content_gaps": [
     {
       "area": "Reisen",
-      "issue": "Reisen: Slots 2–4 (Norwegen, Marokko, Island) bleiben mangels passender Bilder unverändert.",
-      "since": "2026-07-30"
-    },
-    {
-      "area": "Fotografie",
-      "issue": "Fotografie: Kategorie Natur bleibt vorerst mit Fallback, da kein geeignetes Hochformat vorliegt.",
+      "issue": "Reisen: Slots 2–4 (Norwegen, Marokko, Island) bleiben mangels passender Bilder/Texte unverändert.",
       "since": "2026-07-30"
     },
     {
       "area": "Über uns",
       "issue": "Über uns: Bildfläche weiterhin Fallback, kein Material zur Auswahl in diesem Lauf.",
-      "since": "2026-07-30"
-    },
-    {
-      "area": "reisen Position 1",
-      "issue": "reisen Position 1: KI-Vorschlag verworfen (title ungueltig)",
       "since": "2026-07-30"
     }
   ],
@@ -73,6 +66,7 @@
     "fotografie-natur",
     "fotografie-unterwegs",
     "hero-main",
+    "journal-ein-stiller-vormittag-im-doost-bei-theisenzell",
     "journal-leicht-packen-weit-kommen",
     "journal-licht-das-man-nicht-planen-kann",
     "journal-ustupu-in-rot-ein-leiser-tag-der-erinnerung",
@@ -84,15 +78,12 @@
     "reisen-marokko-sahara",
     "reisen-norwegen-fjorde",
     "reisen-panama-kuna-yala",
+    "reisen-panama-kuna-yala-ustupu",
     "seo-main",
     "ueber-uns-main",
     "zitat-main"
   ],
   "image_provenance": {
-    "assets/images/web/achensee-vom-baerenkopf-tirol.webp": {
-      "source_project": "Wandern/achensee-baerenkopf-wanderung-tirol",
-      "source_file": "achensee-vom-baerenkopf-tirol.jpg"
-    },
     "assets/images/web/kanu-mit-hund-ustupu.webp": {
       "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
       "source_file": "kanu-mit-hund-ustupu.jpg"
@@ -104,82 +95,61 @@
     "assets/images/web/ustupu-kuna-hut-rotes-hemd.webp": {
       "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
       "source_file": "ustupu-kuna-hut-rotes-hemd.jpg"
+    },
+    "assets/images/web/palmeninseln-kuna-yala-ustupu.webp": {
+      "source_project": "Reise/panama-kuna-yala-ustupu",
+      "source_file": "palmeninseln-kuna-yala-ustupu.jpg"
+    },
+    "assets/images/web/kanu-auf-ustupu-kuna-yala.webp": {
+      "source_project": "Reise/panama-kuna-yala-ustupu",
+      "source_file": "kanu-auf-ustupu-kuna-yala.jpg"
+    },
+    "assets/images/web/blick-vom-baerenkopf-tirol.webp": {
+      "source_project": "Wandern/baerenkopf-achensee-bergtour-liz-und-ich",
+      "source_file": "blick-vom-baerenkopf-tirol.jpg"
     }
   },
   "last_ai_decisions": {
-    "run_at": "2026-07-30T17:10:45Z",
+    "run_at": "2026-07-30T20:06:50Z",
     "applied": [
       {
         "area": "hero",
         "slot_key": null,
         "action": "update",
         "item_id": "hero-main",
-        "decision_basis": "Klarer, weitläufiger Blick mit starker Linienführung; das Bild stammt aus dem Achensee/Bärenkopf‑Projekt und eignet sich gut für den breiten Hero‑Crop.",
-        "source_project": "Wandern/achensee-baerenkopf-wanderung-tirol",
-        "source_file": "achensee-vom-baerenkopf-tirol.jpg"
+        "decision_basis": "Ruhiges, weites Inselmotiv ohne sichtbares Wasserzeichen; 3:2 lässt sich stimmig auf 16:9/21:9 croppen und passt thematisch als frischer Hero.",
+        "source_project": "Reise/panama-kuna-yala-ustupu",
+        "source_file": "palmeninseln-kuna-yala-ustupu.jpg"
       },
       {
-        "area": "fotografie",
-        "slot_key": "Unterwegs",
-        "action": "replace",
-        "item_id": "fotografie-unterwegs",
-        "decision_basis": "Motiv „Unterwegs auf dem Wasser“ ist zentral im Projekt; das Hochformat passt für den 4:5‑Zuschnitt.",
-        "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
-        "source_file": "kanu-mit-hund-ustupu.jpg"
-      },
-      {
-        "area": "fotografie",
-        "slot_key": "Menschen",
-        "action": "replace",
-        "item_id": "fotografie-menschen",
-        "decision_basis": "Reportage‑Kontext ist klar belegt; das ruhige Porträt funktioniert als Menschen‑Kachel.",
-        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
-        "source_file": "kuna-revolution-ustupu-100-jahre.jpg"
-      },
-      {
-        "area": "fotografie",
-        "slot_key": "Details",
-        "action": "replace",
-        "item_id": "fotografie-details",
-        "decision_basis": "Klares Close‑up der Muster/Materialien; für den tall‑Slot vertikal gut zuschneidbar.",
-        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
-        "source_file": "ustupu-kuna-hut-rotes-hemd.jpg"
-      },
-      {
-        "area": "journal",
+        "area": "reisen",
         "slot_key": 1,
         "action": "replace",
-        "item_id": "journal-ustupu-in-rot-ein-leiser-tag-der-erinnerung",
-        "decision_basis": "Titel und Teaser stammen direkt aus dem Blogentwurf des Projekts.",
-        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
-        "source_file": "Kuna _blog.txt"
+        "item_id": "reisen-panama-kuna-yala-ustupu",
+        "decision_basis": "Klares Ustupu‑Motiv, 4:3‑tauglich und inhaltlich exakt; belastbarer Text aus dem Projekt liegt vor.",
+        "source_project": "Reise/panama-kuna-yala-ustupu",
+        "source_file": "kanu-auf-ustupu-kuna-yala.jpg"
+      },
+      {
+        "area": "fotografie",
+        "slot_key": "Natur",
+        "action": "replace",
+        "item_id": "fotografie-natur",
+        "decision_basis": "Hochformat mit ruhiger Tiefenstaffelung; reine Landschaft und ideal zur Schließung der Natur‑Lücke (Slot 1 tall).",
+        "source_project": "Wandern/baerenkopf-achensee-bergtour-liz-und-ich",
+        "source_file": "blick-vom-baerenkopf-tirol.jpg"
       },
       {
         "area": "journal",
         "slot_key": 2,
         "action": "replace",
-        "item_id": "journal-ustupu-leise-wege-durchs-gr-n",
-        "decision_basis": "Formulierungen und Motive sind im Blogtext des Projekts belegt.",
-        "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
+        "item_id": "journal-ein-stiller-vormittag-im-doost-bei-theisenzell",
+        "decision_basis": "Vollständiger Text liegt vor; bringt thematische Vielfalt neben den Panama‑Stücken. Titel/Excerpt/Body direkt aus der Quelle verdichtet/übernommen.",
+        "source_project": "Landschaft/doost-theisenzell-moosfelsen-waldbach",
         "source_file": "Neues_Projekt_blog.txt"
-      },
-      {
-        "area": "journal",
-        "slot_key": 3,
-        "action": "replace",
-        "item_id": "journal-zwischen-regenwald-und-wasserstra-e-gamboa",
-        "decision_basis": "Beschreibung der Nähe von Kanal und Wald stammt aus dem Blogentwurf.",
-        "source_project": "Reise/gamboa-panama-kanal-nasenbaer-containerschiff",
-        "source_file": "Panama Canal_blog.txt"
       }
     ],
-    "rejected": [
-      {
-        "area": "reisen",
-        "slot_key": 1,
-        "reason": "title fehlt oder zu lang"
-      }
-    ]
+    "rejected": []
   },
-  "last_archive_fingerprint": "26883c35898f7e13c2bda7534400824d5caa4c8bb7346112a1f45583337e223a"
+  "last_archive_fingerprint": "d2f254dfa42193cb72752663332454702ab9c3e53dd57bff2c9d16fb05bd7dd2"
 }

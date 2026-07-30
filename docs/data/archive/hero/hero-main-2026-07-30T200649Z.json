@@ -1,0 +1,29 @@
+{
+  "id": "hero-main",
+  "section": "hero",
+  "title": "Die Welt in Momenten festgehalten.",
+  "subtitle": "Tirol · Achensee",
+  "excerpt": "Weites Sommerlicht, Latschen im Wind und der Achensee als ruhiger Leitfaden durchs Tal – ein Moment von Höhe und Stille.",
+  "body": null,
+  "location": null,
+  "date": null,
+  "category": null,
+  "tags": [
+    "reise",
+    "natur",
+    "fotografie"
+  ],
+  "image": "assets/images/web/achensee-vom-baerenkopf-tirol.webp",
+  "image_mobile": "assets/images/mobile/achensee-vom-baerenkopf-tirol.webp",
+  "image_alt": "Panoramablick vom Bärenkopf auf den türkisfarbenen Achensee, gerahmt von Latschen und Bergflanken.",
+  "image_caption": null,
+  "link": null,
+  "featured": true,
+  "source_project": "Wandern/achensee-baerenkopf-wanderung-tirol",
+  "source_file": "achensee-vom-baerenkopf-tirol.jpg",
+  "created_at": "2026-07-30T00:00:00Z",
+  "updated_at": "2026-07-30T17:10:44Z",
+  "published_at": "2026-07-30T17:10:44Z",
+  "content_status": "published",
+  "fallback_art": "hero-mountain-moon"
+}

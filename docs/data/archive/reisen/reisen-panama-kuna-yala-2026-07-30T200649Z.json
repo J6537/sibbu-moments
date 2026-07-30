@@ -1,0 +1,29 @@
+{
+  "id": "reisen-panama-kuna-yala",
+  "section": "reisen",
+  "title": "Ustupu — Inseln zwischen zwei Meeren",
+  "subtitle": null,
+  "excerpt": "Ein Archipel aus unzähligen kleinen Inseln, gelebter Guna-Kultur und Wasser in Farben, für die es kaum Worte gibt. Die Reisegeschichte entsteht gerade.",
+  "body": null,
+  "location": "Panama · Kuna Yala",
+  "date": null,
+  "category": "reiseziel",
+  "tags": [
+    "panama",
+    "kuna-yala",
+    "inseln"
+  ],
+  "image": null,
+  "image_mobile": null,
+  "image_alt": null,
+  "image_caption": null,
+  "link": null,
+  "featured": true,
+  "source_project": "Reise/panama-kuna-yala-ustupu",
+  "source_file": null,
+  "created_at": "2026-07-30T00:00:00Z",
+  "updated_at": "2026-07-30T00:00:00Z",
+  "published_at": "2026-07-30T00:00:00Z",
+  "content_status": "published",
+  "fallback_art": "panama"
+}
