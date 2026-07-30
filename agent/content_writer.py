@@ -41,6 +41,29 @@ def _mint_unique_id(prefix: str, hint: str, used_ids: set) -> str:
     return f"{base}-{n}"
 
 
+# Reisen- und Journal-Karten haben im festen HTML-Layout (index.html) je
+# Slot ein data-content-id-Attribut, das NIE geaendert wird (index.html ist
+# geschuetzt und wird vom Agenten nie beruehrt). Die Slot-Identitaet ist
+# deshalb an die POSITION gebunden, nicht an die jeweilige Geschichte --
+# genau wie bei fotografie (dort an die Kategorie). Wird hier stattdessen
+# eine frisch gemintete ID vergeben, findet script.js beim naechsten Laden
+# keinen passenden Slot mehr (idMap-Lookup ueber die ID schlaegt fehl) und
+# zeigt weiterhin den urspruenglichen HTML-Fallback-Text/-SVG an, obwohl
+# site-content.json laengst aktualisiert ist. Deshalb IMMER die feste
+# Positions-ID verwenden, nie neu erzeugen.
+REISEN_SLOT_IDS = {
+    1: "reisen-panama-kuna-yala",
+    2: "reisen-norwegen-fjorde",
+    3: "reisen-marokko-sahara",
+    4: "reisen-island-gletscher",
+}
+JOURNAL_SLOT_IDS = {
+    1: "journal-wie-eine-reise-zur-geschichte-wird",
+    2: "journal-leicht-packen-weit-kommen",
+    3: "journal-licht-das-man-nicht-planen-kann",
+}
+
+
 def _archive_content_item(item: dict, section: str, timestamp: str):
     if not item:
         return
@@ -120,7 +143,7 @@ def _apply_reisen(decision: Decision, projects, site_content, content_schema, ti
     _archive_content_item(existing, "reisen", timestamp)
     archived_image = images.archive_existing_image(existing.get("image"), timestamp)
 
-    new_id = _mint_unique_id("reisen", project.projektordner, used_ids)
+    new_id = REISEN_SLOT_IDS.get(decision.slot_key) or existing.get("id")
     used_ids.add(new_id)
 
     new_item = {
@@ -194,7 +217,7 @@ def _apply_journal(decision: Decision, site_content, timestamp, used_ids, write_
 
     _archive_content_item(existing, "journal", timestamp)
 
-    new_id = _mint_unique_id("journal", decision.title, used_ids)
+    new_id = JOURNAL_SLOT_IDS.get(decision.slot_key) or existing.get("id")
     used_ids.add(new_id)
 
     new_item = {
