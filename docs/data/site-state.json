@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
   "description": "Agenten-Gedächtnis für Sibbu Moments. Wird NICHT auf der Website ausgegeben. Wird vom späteren lokalen Website-Pflege-Agenten gelesen und nach jedem Lauf aktualisiert. Diese Erstversion beschreibt den Zustand direkt nach der technischen Umstellung auf die datenbasierte Architektur — vor dem ersten Agentenlauf.",
-  "last_updated": "2026-07-30T20:42:23Z",
-  "last_checked": "2026-07-30T20:42:23Z",
+  "last_updated": "2026-07-30T21:30:12Z",
+  "last_checked": "2026-07-30T21:30:12Z",
   "last_successful_test": null,
   "last_git_commit": "",
   "publish_status": "ready_for_review",
@@ -46,13 +46,13 @@
     "zitat": "2026-07-30T00:00:00Z",
     "reisen": "2026-07-30T20:42:23Z",
     "fotografie": "2026-07-30T20:09:13Z",
-    "journal": "2026-07-30T20:42:23Z",
+    "journal": "2026-07-30T21:30:12Z",
     "ueber-uns": "2026-07-30T00:00:00Z",
     "kontakt": "2026-07-30T00:00:00Z",
     "seo": "2026-07-30T00:00:00Z"
   },
   "content_source": "sibbu_content_agent_ai",
-  "used_project": "Kultur/ustupu-kuna-yala-indigene-kultur, Reise/gamboa-panama-kanal-nasenbaer-containerschiff, Reise/kuna-yala-san-blas-palmenstrand, Wandern/achensee-baerenkopf-wanderung-tirol",
+  "used_project": "Reise/gamboa-panama-kanal-nasenbaer-containerschiff",
   "known_content_gaps": [],
   "notes_for_next_agent_run": "Dies ist der Ausgangszustand nach der technischen Migration. Es hat noch kein automatisierter Pflege-Lauf stattgefunden. Vor dem ersten produktiven Lauf: tools/validate_site.py ausführen und last_successful_test erst nach grünem Ergebnis setzen.",
   "used_ids": [
@@ -122,55 +122,19 @@
     }
   },
   "last_ai_decisions": {
-    "run_at": "2026-07-30T20:42:23Z",
+    "run_at": "2026-07-30T21:30:12Z",
     "applied": [
       {
-        "area": "reisen",
-        "slot_key": 2,
-        "action": "replace",
-        "item_id": "reisen-achensee-baerenkopf-wanderung-tirol",
-        "decision_basis": "Bild passt ins 4:3-Kartenformat und Text ist durch Bärenkopf_blog.txt belegt.",
-        "source_project": "Wandern/achensee-baerenkopf-wanderung-tirol",
-        "source_file": "achensee-vom-baerenkopf.jpg"
-      },
-      {
-        "area": "reisen",
+        "area": "journal",
         "slot_key": 3,
         "action": "replace",
-        "item_id": "reisen-gamboa-panama-kanal-nasenbaer-containerschiff",
-        "decision_basis": "Klares Reiseziel-Motiv; Textbezug aus Panama Canal_blog.txt, Bild zeigt die Kanal‑Szene.",
+        "item_id": "journal-licht-das-man-nicht-planen-kann",
+        "decision_basis": "Vorschlag aus Schritt 1 mit belastbarem Blogtext; ersetzt thematisch nahen San‑Blas‑Teaser und bringt Kontrast zwischen Kanal und Wald.",
         "source_project": "Reise/gamboa-panama-kanal-nasenbaer-containerschiff",
-        "source_file": "containerschiff-bei-gamboa-panama-kanal.jpg"
-      },
-      {
-        "area": "reisen",
-        "slot_key": 4,
-        "action": "replace",
-        "item_id": "reisen-kuna-yala-san-blas-palmenstrand",
-        "decision_basis": "Szenisch starke 4:3‑Aufnahme; Textbasis durch Neues_Projekt265_blog.txt belegt.",
-        "source_project": "Reise/kuna-yala-san-blas-palmenstrand",
-        "source_file": "balancieren-auf-palmenstamm-san-blas.jpg"
-      },
-      {
-        "area": "journal",
-        "slot_key": 1,
-        "action": "replace",
-        "item_id": "journal-ustupu-leise-wege-durchs-gr-n-2",
-        "decision_basis": "Vorschlag aus Schritt 1; Text belegt durch Neues_Projekt_blog.txt und ergänzt das bestehende Ustupu‑Thema sinnvoll.",
-        "source_project": "Kultur/ustupu-kuna-yala-indigene-kultur",
-        "source_file": "Neues_Projekt_blog.txt"
-      },
-      {
-        "area": "journal",
-        "slot_key": 3,
-        "action": "replace",
-        "item_id": "journal-palmen-riff-und-eine-ruhige-minute-in-kuna-yala",
-        "decision_basis": "Vorschlag aus Schritt 1 mit eindeutig belegter Quelle; füllt den noch unveröffentlichten Slot.",
-        "source_project": "Reise/kuna-yala-san-blas-palmenstrand",
-        "source_file": "Neues_Projekt265_blog.txt"
+        "source_file": "Panama Canal_blog.txt"
       }
     ],
     "rejected": []
   },
-  "last_archive_fingerprint": "d2f254dfa42193cb72752663332454702ab9c3e53dd57bff2c9d16fb05bd7dd2"
+  "last_archive_fingerprint": "af3c2c57377ba33496010806aad9892fa7d6715a8d7f695670d667b94bff82f5"
 }
