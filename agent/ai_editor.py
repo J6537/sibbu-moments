@@ -92,9 +92,16 @@ grossformatige Hauptkarte. Fotografie: jede der vier Kategorien \
 (Natur/Unterwegs/Menschen/Details) hoechstens einmal.
 - Ein Bild darf in diesem Lauf nur in genau einem finalen Slot verwendet \
 werden -- keine Mehrfachverwendung ueber Bereiche/Slots hinweg.
-- Ohne ueberzeugenden Kandidaten fuer einen Slot: action="keep" setzen und \
-die uebrigen Felder auf null lassen -- der bestehende Website-Inhalt bleibt \
-dann unangetastet.
+- WICHTIG -- Vollstaendigkeit hat Prioritaet: Im AKTUELLEN WEBSITE-ZUSTAND \
+erkennst du an content_status ("planned"/"draft" statt "published") und an \
+image=null, welche Slots noch unbefuellt sind. Wenn Schritt 1 fuer einen \
+solchen leeren Slot einen Kandidaten mit brauchbarem, quellengestuetztem \
+Material geliefert hat, SOLLST du ihn verwenden -- nutze nicht nur einen \
+einzigen Kandidaten pro Lauf, wenn mehrere gute vorliegen. action="keep" \
+ist nur fuer Slots gedacht, fuer die WIRKLICH kein brauchbarer Kandidat \
+da ist (z.B. Bild ungeeignet, Text nicht belegt) oder die bereits gut \
+befuellt sind und keine Verbesserung noetig ist -- nicht als bequeme \
+Standardwahl, wenn eigentlich Material vorliegt.
 - Titel/Location/Excerpt/Alt-Text redaktionell auswaehlen oder verdichten, \
 aber ausschliesslich mit Informationen, die durch die Quelldateien belegt \
 sind. Nichts erfinden.
