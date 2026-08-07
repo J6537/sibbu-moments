@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
   "description": "Agenten-Gedächtnis für Sibbu Moments. Wird NICHT auf der Website ausgegeben. Wird vom späteren lokalen Website-Pflege-Agenten gelesen und nach jedem Lauf aktualisiert. Diese Erstversion beschreibt den Zustand direkt nach der technischen Umstellung auf die datenbasierte Architektur — vor dem ersten Agentenlauf.",
-  "last_updated": "2026-07-30T21:30:12Z",
-  "last_checked": "2026-07-30T21:30:12Z",
+  "last_updated": "2026-08-07T16:32:43Z",
+  "last_checked": "2026-08-07T16:32:43Z",
   "last_successful_test": null,
   "last_git_commit": "",
   "publish_status": "ready_for_review",
@@ -36,7 +36,7 @@
     "assets/images/web/containerschiff-bei-gamboa-panama-kanal.webp",
     "assets/images/web/kanu-auf-ustupu-kuna-yala.webp",
     "assets/images/web/kanu-mit-hund-ustupu.webp",
-    "assets/images/web/kuna-revolution-ustupu-100-jahre-2.webp",
+    "assets/images/web/kuna-revolution-ustupu-feier.webp",
     "assets/images/web/palmeninseln-kuna-yala-ustupu.webp",
     "assets/images/web/ustupu-kuna-hut-rotes-hemd.webp",
     "assets/og-image.svg"
@@ -45,15 +45,21 @@
     "hero": "2026-07-30T20:06:50Z",
     "zitat": "2026-07-30T00:00:00Z",
     "reisen": "2026-07-30T20:42:23Z",
-    "fotografie": "2026-07-30T20:09:13Z",
-    "journal": "2026-07-30T21:30:12Z",
+    "fotografie": "2026-08-07T16:32:43Z",
+    "journal": "2026-08-07T16:32:43Z",
     "ueber-uns": "2026-07-30T00:00:00Z",
     "kontakt": "2026-07-30T00:00:00Z",
     "seo": "2026-07-30T00:00:00Z"
   },
   "content_source": "sibbu_content_agent_ai",
-  "used_project": "Reise/gamboa-panama-kanal-nasenbaer-containerschiff",
-  "known_content_gaps": [],
+  "used_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+  "known_content_gaps": [
+    {
+      "area": "allgemein",
+      "issue": "Kein eigenständiger Über‑uns‑Text im Archiv auffindbar; kein Projekt mit allgemeiner Selbstvorstellung von Sibbu Moments – Slot bleibt unbesetzt.",
+      "since": "2026-08-07"
+    }
+  ],
   "notes_for_next_agent_run": "Dies ist der Ausgangszustand nach der technischen Migration. Es hat noch kein automatisierter Pflege-Lauf stattgefunden. Vor dem ersten produktiven Lauf: tools/validate_site.py ausführen und last_successful_test erst nach grünem Ergebnis setzen.",
   "used_ids": [
     "fotografie-details",
@@ -100,10 +106,6 @@
       "source_project": "Wandern/baerenkopf-achensee-bergtour-liz-und-ich",
       "source_file": "blick-vom-baerenkopf-tirol.jpg"
     },
-    "assets/images/web/kuna-revolution-ustupu-100-jahre-2.webp": {
-      "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
-      "source_file": "kuna-revolution-ustupu-100-jahre.jpg"
-    },
     "assets/images/web/ustupu-kuna-hut-rotes-hemd.webp": {
       "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
       "source_file": "ustupu-kuna-hut-rotes-hemd.jpg"
@@ -119,22 +121,35 @@
     "assets/images/web/balancieren-auf-palmenstamm-san-blas.webp": {
       "source_project": "Reise/kuna-yala-san-blas-palmenstrand",
       "source_file": "balancieren-auf-palmenstamm-san-blas.jpg"
+    },
+    "assets/images/web/kuna-revolution-ustupu-feier.webp": {
+      "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+      "source_file": "kuna-revolution-ustupu-feier.jpg"
     }
   },
   "last_ai_decisions": {
-    "run_at": "2026-07-30T21:30:12Z",
+    "run_at": "2026-08-07T16:32:43Z",
     "applied": [
       {
-        "area": "journal",
-        "slot_key": 3,
+        "area": "fotografie",
+        "slot_key": "Menschen",
         "action": "replace",
-        "item_id": "journal-licht-das-man-nicht-planen-kann",
-        "decision_basis": "Vorschlag aus Schritt 1 mit belastbarem Blogtext; ersetzt thematisch nahen San‑Blas‑Teaser und bringt Kontrast zwischen Kanal und Wald.",
-        "source_project": "Reise/gamboa-panama-kanal-nasenbaer-containerschiff",
-        "source_file": "Panama Canal_blog.txt"
+        "item_id": "fotografie-menschen",
+        "decision_basis": "Helles, farbkräftiges Porträt mit klarer Personenwirkung; aus demselben belegten Projekt, visuell markanter als das bisherige Dämmerungsmotiv.",
+        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+        "source_file": "kuna-revolution-ustupu-feier.jpg"
+      },
+      {
+        "area": "journal",
+        "slot_key": 1,
+        "action": "replace",
+        "item_id": "journal-wie-eine-reise-zur-geschichte-wird",
+        "decision_basis": "Titel, Teaser und Text stammen verdichtet aus „Kuna _blog.txt“; klar belegtes Thema mit starkem kulturellem Fokus.",
+        "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+        "source_file": "Kuna _blog.txt"
       }
     ],
     "rejected": []
   },
-  "last_archive_fingerprint": "af3c2c57377ba33496010806aad9892fa7d6715a8d7f695670d667b94bff82f5"
+  "last_archive_fingerprint": "e133c65ec9cd22adedc4ead571c00e8164d962b58ab3399717c3d5f8b0d95d92"
 }

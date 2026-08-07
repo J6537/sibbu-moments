@@ -1,0 +1,27 @@
+{
+  "id": "fotografie-menschen",
+  "section": "fotografie",
+  "title": null,
+  "subtitle": null,
+  "excerpt": null,
+  "body": null,
+  "location": null,
+  "date": null,
+  "category": "Menschen",
+  "tags": [
+    "menschen"
+  ],
+  "image": "assets/images/web/kuna-revolution-ustupu-100-jahre-2.webp",
+  "image_mobile": null,
+  "image_alt": "Person in traditioneller Kleidung bei Abenddämmerung in Ustupu; Laternenlicht im Hintergrund.",
+  "image_caption": null,
+  "link": null,
+  "featured": false,
+  "source_project": "Kultur/ustupu-100-jahre-kuna-revolution",
+  "source_file": "kuna-revolution-ustupu-100-jahre.jpg",
+  "created_at": "2026-07-30T00:00:00Z",
+  "updated_at": "2026-07-30T20:09:12Z",
+  "published_at": "2026-07-30T20:09:12Z",
+  "content_status": "published",
+  "fallback_art": "p3"
+}
